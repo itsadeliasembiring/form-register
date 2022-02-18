@@ -28,7 +28,7 @@ export default function Navbar(props) {
           }}
         >
           {/* Icon */}
-          <Link to="/">
+          <Link to="/" style={{ background: "transparent" }}>
             {/* Icon */}
             <IconButton
               onClick

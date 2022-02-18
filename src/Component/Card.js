@@ -1,7 +1,7 @@
 import * as React from "react";
+// Import Component MUI
 import {
   Card,
-  CardActions,
   CardContent,
   Checkbox,
   Divider,
@@ -10,135 +10,183 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import InsertDriveFileOutlinedIcon from "@mui/icons-material/InsertDriveFileOutlined";
-import LocalAtmIcon from "@mui/icons-material/LocalAtm";
+import { makeStyles } from "@mui/styles";
+// Import Icon
+import RegisterIcon from "../Icons/pendaftaran.svg";
+import MoneyIcon from "../Icons/iuran.svg";
+import BeltIcon from "../Icons/sabuk.svg";
+import ClothesIcon from "../Icons/seragam.svg";
+// Import Theme
 import Colors from "../Theme/Color";
 
-export default function BasicCard() {
+const useStyles = makeStyles(() => ({
+  label: {
+    fontSize: "15px",
+  },
+  checkbox: {
+    color: Colors.seaGreen,
+    "&.Mui-checked": {
+      color: Colors.seaGreen,
+    },
+  },
+}));
+
+export default function Cards() {
+  const classes = useStyles();
+
   return (
     <>
-      <Card sx={{ minWidth: 275, height: 200 }} elevation={3}>
+      <Card
+        sx={{
+          width: "100%",
+          height: 205,
+          mt: 5,
+          borderRadius: 2,
+          boxShadow: "0px 0px 6px #a1a1a1",
+        }}
+      >
         <CardContent>
-          <Typography sx={{ fontSize: 15, fontWeight: "bold" }} gutterBottom>
+          {/* Title */}
+          <Typography
+            sx={{ fontSize: 17, fontWeight: "bold", align: "left" }}
+            gutterBottom
+          >
             Informasi Biaya
           </Typography>
-
-          <Grid>
-            <Grid item sx={{ display: "flex", alignItems: "center" }}>
-              <Grid item mr={1.5} color={Colors.gray}>
-                <InsertDriveFileOutlinedIcon />
-              </Grid>
-              <Grid item mr={9.5}>
-                <Typography sx={{ fontSize: 14 }}>Biaya Pendaftaran</Typography>
-              </Grid>
-              <Grid item>
-                <Typography sx={{ fontSize: 14, fontWeight: "bold" }}>
-                  Rp. 50.000
-                </Typography>
-              </Grid>
+          {/* List 1 */}
+          <Grid container direction={"row"} sx={{ alignItems: "center" }}>
+            {/* Icon */}
+            <Grid item xs={1} color={Colors.gray} mr={0.2}>
+              <img src={RegisterIcon} width={24} heigth={24} />
             </Grid>
 
-            <Grid item sx={{ display: "flex", alignItems: "center" }}>
-              <Grid item mr={1.5} color={Colors.gray}>
-                <LocalAtmIcon />
-              </Grid>
-              <Grid item mr={13}>
-                <Typography sx={{ fontSize: 14 }}>Iuran Bulanan</Typography>
-              </Grid>
-              <Grid item>
-                <Typography sx={{ fontSize: 14, fontWeight: "bold" }}>
-                  Rp. 100.000
-                </Typography>
-              </Grid>
+            {/* Item */}
+            <Grid item xs={7}>
+              <Typography sx={{ fontSize: 15 }}>Biaya Pendaftaran</Typography>
             </Grid>
 
-            <Grid item sx={{ display: "flex", alignItems: "center" }}>
-              <Grid item mr={1.5} color={Colors.gray}>
-                <InsertDriveFileOutlinedIcon />
-              </Grid>
-              <Grid item mr={16.8}>
-                <Typography sx={{ fontSize: 14 }}>Seragam</Typography>
-              </Grid>
-              <Grid item>
-                <Typography sx={{ fontSize: 14, fontWeight: "bold" }}>
-                  Rp. 80.000
-                </Typography>
-              </Grid>
+            {/* Price */}
+            <Grid item textAlign="right" xs>
+              <Typography sx={{ fontSize: 15, fontWeight: "bold" }}>
+                Rp. 50.000
+              </Typography>
+            </Grid>
+          </Grid>
+
+          {/* List 2 */}
+          <Grid container direction={"row"} sx={{ alignItems: "center" }}>
+            {/* Icon */}
+            <Grid item xs={1} color={Colors.gray} mr={0.2}>
+              <img src={MoneyIcon} width={24} heigth={24} />
             </Grid>
 
-            <Grid item sx={{ display: "flex", alignItems: "center" }}>
-              <Grid item mr={1.5} color={Colors.gray}>
-                <InsertDriveFileOutlinedIcon />
-              </Grid>
-              <Grid item mr={19}>
-                <Typography sx={{ fontSize: 14 }}>Sabuk</Typography>
-              </Grid>
-              <Grid item>
-                <Typography sx={{ fontSize: 14, fontWeight: "bold" }}>
-                  Rp. 30.000
-                </Typography>
-              </Grid>
+            {/* Item */}
+            <Grid item xs={7}>
+              <Typography sx={{ fontSize: 15 }}>Iuran Bulanan</Typography>
             </Grid>
 
-            <Grid item mt={1}>
-              <Divider color={"lightgray"} />
+            {/* Price */}
+            <Grid item textAlign="right" xs>
+              <Typography sx={{ fontSize: 15, fontWeight: "bold" }}>
+                Rp. 100.000
+              </Typography>
+            </Grid>
+          </Grid>
+
+          {/* List 3 */}
+          <Grid container direction={"row"} sx={{ alignItems: "center" }}>
+            {/* Icon */}
+            <Grid item xs={1} color={Colors.gray} mr={0.2}>
+              <img src={ClothesIcon} width={24} heigth={24} />
             </Grid>
 
-            <Grid item sx={{ display: "flex", alignItems: "center", mt: 1 }}>
-              <Grid item mr={4.5}></Grid>
+            {/* Item */}
+            <Grid item xs={7}>
+              <Typography sx={{ fontSize: 15 }}>Seragam</Typography>
+            </Grid>
 
-              <Grid item mr={19}>
-                <Typography sx={{ fontSize: 14.5 }}>Total</Typography>
-              </Grid>
+            {/* Price */}
+            <Grid item textAlign="right" xs>
+              <Typography sx={{ fontSize: 15, fontWeight: "bold" }}>
+                Rp. 80.000
+              </Typography>
+            </Grid>
+          </Grid>
 
-              <Grid item>
-                <Typography sx={{ fontSize: 14.5, fontWeight: "bold" }}>
-                  Rp. 260.000
-                </Typography>
-              </Grid>
+          {/* List 4 */}
+          <Grid container direction={"row"} sx={{ alignItems: "center" }}>
+            {/* Icon */}
+            <Grid item xs={1} color={Colors.gray} mr={0.2}>
+              <img src={BeltIcon} width={24} heigth={24} />
+            </Grid>
+
+            {/* Item */}
+            <Grid item xs={7}>
+              <Typography sx={{ fontSize: 15 }}>Sabuk</Typography>
+            </Grid>
+
+            {/* Price */}
+            <Grid item textAlign="right" xs mb={1.5}>
+              <Typography sx={{ fontSize: 15, fontWeight: "bold" }}>
+                Rp. 30.000
+              </Typography>
+            </Grid>
+          </Grid>
+
+          <Divider color={Colors.lightGray} />
+
+          <Grid
+            container
+            direction={"row"}
+            sx={{ alignItems: "center", mt: 1 }}
+          >
+            <Grid item xs={1} mr={0.2}></Grid>
+
+            <Grid item xs={7}>
+              <Typography sx={{ fontSize: 16 }}>Total</Typography>
+            </Grid>
+
+            <Grid item xs>
+              <Typography
+                sx={{
+                  fontSize: 15,
+                  fontWeight: "bold",
+                  textAlign: "right",
+                }}
+              >
+                Rp. 260.000
+              </Typography>
             </Grid>
           </Grid>
         </CardContent>
       </Card>
 
-      <Card sx={{ minWidth: 275, height: 140, mt: 5 }} elevation={3}>
+      <Card
+        sx={{
+          width: "100%",
+          height: 140,
+          mt: 5,
+          borderRadius: 2,
+          boxShadow: "0px 0px 6px #a1a1a1",
+        }}
+      >
         <CardContent>
-          <Typography sx={{ fontSize: 15, fontWeight: "bold" }} gutterBottom>
+          <Typography sx={{ fontSize: 17, fontWeight: "bold" }}>
             Biaya Tambahan
           </Typography>
 
-          <Grid>
-            <Grid item>
-              <FormGroup>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      sx={{
-                        color: Colors.seaGreen,
-                        "&.Mui-checked": {
-                          color: Colors.seaGreen,
-                        },
-                      }}
-                    />
-                  }
-                  label="Seragam"
-                />
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      sx={{
-                        color: Colors.seaGreen,
-                        "&.Mui-checked": {
-                          color: Colors.seaGreen,
-                        },
-                      }}
-                    />
-                  }
-                  label="Sabuk"
-                />
-              </FormGroup>
-            </Grid>
-          </Grid>
+          <FormGroup sx={{ fontSize: 15 }}>
+            <FormControlLabel
+              control={<Checkbox className={classes.checkbox} />}
+              label="Seragam"
+              classes={{ label: classes.label }}
+            />
+            <FormControlLabel
+              control={<Checkbox className={classes.checkbox} />}
+              label="Sabuk"
+              classes={{ label: classes.label }}
+            />
+          </FormGroup>
         </CardContent>
       </Card>
     </>

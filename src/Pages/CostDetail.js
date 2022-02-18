@@ -14,15 +14,11 @@ export default function CostDetail() {
       <Container>
         <Navbar>Pendaftaran</Navbar>
         <Box mt={10}>
+          <Stepper />
+
+          <Card />
+
           <Grid Container>
-            <Grid item xs={12}>
-              <Stepper />
-            </Grid>
-
-            <Grid item xs={12} sx={{ mt: 3 }}>
-              <Card />
-            </Grid>
-
             <Grid item xs={12} sx={{ mt: 20 }}>
               {/* Button  */}
               <Link to="/form-register" style={{ textDecoration: "none" }}>
