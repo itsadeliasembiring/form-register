@@ -133,3 +133,7 @@ table {
 /* body {
   font-family: "Roboto", sans-serif;
 } */
+
+.calendar input:active {
+  border-color: #d3d3d3;
+}
