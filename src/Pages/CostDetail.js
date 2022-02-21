@@ -1,6 +1,6 @@
 import React from "react";
 // Import Component MUI
-import { Box, Button, Container, Grid, Typography } from "@mui/material";
+import { Box, Button, Container, Grid } from "@mui/material";
 // Import Component
 import Navbar from "../Component/Navbar";
 import Stepper from "../Component/Stepper";

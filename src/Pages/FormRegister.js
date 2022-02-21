@@ -3,17 +3,17 @@ import React from "react";
 import {
   Box,
   Button,
+  Checkbox,
   Container,
   Grid,
   FormControl,
   FormControlLabel,
+  FormGroup,
   FormLabel,
   Radio,
   RadioGroup,
   TextField,
   Typography,
-  Checkbox,
-  FormGroup,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
@@ -26,6 +26,7 @@ import Colors from "../Theme/Color";
 // Import React router
 import { Link } from "react-router-dom";
 
+// Styles
 const useStyles = makeStyles(() => ({
   fontSize: {
     "& span:last-child": {
@@ -39,7 +40,7 @@ const useStyles = makeStyles(() => ({
       color: Colors.seaGreen,
     },
   },
-  rootLabel: {
+  genderLabel: {
     "& .MuiFormLabel-root": {
       color: Colors.black,
       fontWeight: "bold",
@@ -67,8 +68,14 @@ const useStyles = makeStyles(() => ({
       color: Colors.seaGreen,
     },
   },
+  BackButton: {
+    color: Colors.white,
+    backgroundColor: Colors.seaGreen,
+    "&:hover": {
+      backgroundColor: Colors.seaGreen,
+    },
+  },
 }));
-
 // Costum Button
 const BackButton = styled(Button)(({ theme }) => ({
   color: Colors.white,
@@ -77,24 +84,24 @@ const BackButton = styled(Button)(({ theme }) => ({
     backgroundColor: Colors.seaGreen,
   },
 }));
+// Costum Text Field
+const TextFields = styled(TextField)({
+  width: "100%",
+  "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+    border: "1.5px solid",
+    borderColor: Colors.lightGray,
+    borderRadius: 7,
+  },
+  "&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+    borderColor: Colors.lightGray,
+  },
+  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+    borderColor: Colors.lightGray,
+  },
+});
 
 export default function FormRegister() {
   const classes = useStyles();
-  // Costum TextField
-  const TextFields = styled(TextField)({
-    width: "100%",
-    "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
-      border: "1.5px solid",
-      borderColor: Colors.lightGray,
-      borderRadius: 7,
-    },
-    "&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
-      borderColor: Colors.lightGray,
-    },
-    "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
-      borderColor: Colors.lightGray,
-    },
-  });
 
   return (
     <>
@@ -102,7 +109,6 @@ export default function FormRegister() {
         <Navbar>Pendaftaran</Navbar>
         <Box mt={10}>
           <Stepper />
-          {/* Title */}
           <Typography
             sx={{ mt: 2, fontSize: 20, fontWeight: "bold", align: "left" }}
             gutterBottom
@@ -111,7 +117,7 @@ export default function FormRegister() {
           </Typography>
 
           <Grid container direction={"row"} spacing={3}>
-            {/* Profil Photo */}
+            {/* Profil */}
             <Grid item sx={{ color: Colors.seaGreen }} xs={3}>
               <AccountCircleIcon sx={{ width: 80, height: 80 }} />
             </Grid>
@@ -130,7 +136,7 @@ export default function FormRegister() {
               </Grid>
               {/* Gender */}
               <Grid item mt={1}>
-                <FormControl className={classes.rootLabel}>
+                <FormControl className={classes.genderLabel}>
                   <FormLabel id="gender">Jenis Kelamin</FormLabel>
                   <RadioGroup row aria-labelledby="gender">
                     <FormControlLabel

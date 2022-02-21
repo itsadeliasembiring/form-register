@@ -35,7 +35,7 @@ export default function Submitted() {
               fontSize: 25,
             }}
           >
-            Data berhasil disubmit!
+            Scan QRCode berikut:
           </Typography>
 
           <Grid
