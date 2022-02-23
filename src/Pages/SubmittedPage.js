@@ -28,7 +28,7 @@ export default function SubmittedPage() {
             sx={{
               textAlign: "center",
               fontWeight: "bold",
-              fontSize: 25,
+              fontSize: 23,
             }}
           >
             Scan QRCode berikut:
@@ -52,7 +52,7 @@ export default function SubmittedPage() {
               <Typography
                 sx={{
                   textAlign: "center",
-                  fontSize: 16,
+                  fontSize: 15,
                   color: Colors.gray,
                 }}
               >

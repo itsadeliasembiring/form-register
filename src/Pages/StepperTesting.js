@@ -1,6 +1,5 @@
 import React from "react";
 import { makeStyles } from "@mui/styles";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Stepper, Step, StepLabel, Button, Typography } from "@mui/material";
 // Import component
 import CostPage from "./CostPage";
@@ -9,22 +8,33 @@ import SubmittedPage from "./SubmittedPage";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: "90%",
+    width: "100%",
   },
   // button: {
-  //   marginRight: theme.spacing(1),
+  //   marginRight: theme.spacing(1)
   // },
   // instructions: {
   //   marginTop: theme.spacing(1),
-  //   marginBottom: theme.spacing(1),
-  // },
+  //   marginBottom: theme.spacing(1)
+  // }
 }));
 
 function getSteps() {
-  return ["Select campaign settings", "Create an ad group", "Create an ad"];
+  return ["", "", ""];
 }
 
-// Isi Step
+// function getStepContent(step) {
+//   switch (step) {
+//     case 0:
+//       return "Select campaign settings...";
+//     case 1:
+//       return "What is an ad group anyways?";
+//     case 2:
+//       return "This is the bit I really care about!";
+//     default:
+//       return "Unknown step";
+//   }
+// }
 function getStepContent(step) {
   switch (step) {
     case 0:
@@ -34,25 +44,24 @@ function getStepContent(step) {
     case 2:
       return <SubmittedPage />;
     default:
-      return "Content 4";
+      return "Unknown step";
   }
 }
-const theme = createTheme();
-function FormRegister() {
+export default function StepperTesting() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
   const steps = getSteps();
 
-  function isStepOptional(step) {
+  const isStepOptional = (step) => {
     return step === 1;
-  }
+  };
 
-  function isStepSkipped(step) {
+  const isStepSkipped = (step) => {
     return skipped.has(step);
-  }
+  };
 
-  function handleNext() {
+  const handleNext = () => {
     let newSkipped = skipped;
     if (isStepSkipped(activeStep)) {
       newSkipped = new Set(newSkipped.values());
@@ -61,13 +70,13 @@ function FormRegister() {
 
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     setSkipped(newSkipped);
-  }
+  };
 
-  function handleBack() {
+  const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  }
+  };
 
-  function handleSkip() {
+  const handleSkip = () => {
     if (!isStepOptional(activeStep)) {
       // You probably want to guard against something like this,
       // it should never occur unless someone's actively trying to break something.
@@ -80,11 +89,11 @@ function FormRegister() {
       newSkipped.add(activeStep);
       return newSkipped;
     });
-  }
+  };
 
-  function handleReset() {
+  const handleReset = () => {
     setActiveStep(0);
-  }
+  };
 
   return (
     <div className={classes.root}>
@@ -140,6 +149,7 @@ function FormRegister() {
                   Skip
                 </Button>
               )}
+
               <Button
                 variant="contained"
                 color="primary"
@@ -155,5 +165,3 @@ function FormRegister() {
     </div>
   );
 }
-
-export default FormRegister;

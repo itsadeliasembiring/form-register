@@ -3,7 +3,7 @@ import React from "react";
 import { Box, Button, Container, Grid } from "@mui/material";
 // Import Component
 import Navbar from "../Component/Navbar";
-import Card from "../Component/Card";
+import Card from "../Component/Card/Card";
 
 export default function CostPage() {
   return (

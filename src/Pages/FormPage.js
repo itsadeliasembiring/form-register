@@ -41,7 +41,7 @@ const useStyles = makeStyles(() => ({
     "& .MuiFormLabel-root": {
       color: Colors.black,
       fontWeight: "bold",
-      fontSize: 16,
+      fontSize: 14,
     },
     "& .MuiFormLabel-root.Mui-focused": {
       color: Colors.seaGreen,
@@ -112,7 +112,7 @@ export default function FormPage() {
         <Navbar>Pendaftaran</Navbar>
         <Box mt={10}>
           <Typography
-            sx={{ mt: 2, fontSize: 20, fontWeight: "bold", align: "left" }}
+            sx={{ mt: 2, fontSize: 16, fontWeight: "bold", align: "left" }}
             gutterBottom
           >
             Lengkapi Data
@@ -173,7 +173,7 @@ export default function FormPage() {
               ></TextFields>
             </Grid>
             {/* Tanggal lahir */}
-            <Grid item xs alignItems={"right"}>
+            <Grid item xs alignItems={"right"} justifyContent={"center"}>
               <input
                 type="date"
                 className="calendar"
@@ -199,6 +199,8 @@ export default function FormPage() {
                   style: {
                     fontSize: 12,
                     height: 60,
+
+                    padding: -12,
                   },
                 }}
               ></TextFields>
@@ -219,7 +221,7 @@ export default function FormPage() {
             {/* Checkbox */}
             <Grid item>
               <Typography
-                sx={{ fontSize: 16, fontWeight: "bold", align: "left" }}
+                sx={{ fontSize: 14, fontWeight: "bold", align: "left" }}
               >
                 Apakah Anda
               </Typography>
@@ -352,7 +354,7 @@ export default function FormPage() {
           <Grid container spacing={1.3} mt={0.5} alignItems="center">
             <Grid item xs={12}>
               <Typography
-                sx={{ fontSize: 14, fontWeight: "bold", align: "left" }}
+                sx={{ fontSize: 16, fontWeight: "bold", align: "left" }}
               >
                 Informasi Orang Tua
               </Typography>
@@ -462,6 +464,7 @@ export default function FormPage() {
           <Grid container spacing={1} mt={0.2} mb={2} alignItems="center">
             <Grid item xs={6}>
               {/* Button Back */}
+
               <BackButton
                 variant="contained"
                 onClick
@@ -479,7 +482,6 @@ export default function FormPage() {
 
             <Grid item xs>
               {/* Button Next */}
-
               <Button
                 variant="contained"
                 color="warning"
