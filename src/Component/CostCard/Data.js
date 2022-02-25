@@ -4,7 +4,8 @@ import MoneyIcon from "../../Assets/Icons/iuran.svg";
 import BeltIcon from "../../Assets/Icons/sabuk.svg";
 import ClothesIcon from "../../Assets/Icons/seragam.svg";
 
-const DetailCard = [
+// Mandatory Cost
+const BiayaIuran = [
   {
     icon: RegisterIcon,
     item: "Biaya Pendaftaran",
@@ -15,11 +16,17 @@ const DetailCard = [
     item: "Iuran Bulanan",
     price: 100000,
   },
+];
+
+// Optional Cost
+const Seragam = [
   {
     icon: ClothesIcon,
     item: "Seragam",
-    price: 50000,
+    price: 80000,
   },
+];
+const Sabuk = [
   {
     icon: BeltIcon,
     item: "Sabuk",
@@ -27,4 +34,4 @@ const DetailCard = [
   },
 ];
 
-export default DetailCard;
+export { BiayaIuran, Seragam, Sabuk };

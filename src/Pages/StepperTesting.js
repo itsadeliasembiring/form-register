@@ -2,51 +2,46 @@ import React from "react";
 import { makeStyles } from "@mui/styles";
 import { Stepper, Step, StepLabel, Button, Typography } from "@mui/material";
 // Import component
-import CostPage from "./CostPage";
-import FormPage from "./FormPage";
-import SubmittedPage from "./SubmittedPage";
+import test from "./test";
+import CostDetail from "./CostDetail";
+import FormPages from "./FormPages/Form";
+import SubmittedPageS from "./SubmittedPages";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
   },
-  // button: {
-  //   marginRight: theme.spacing(1)
-  // },
-  // instructions: {
-  //   marginTop: theme.spacing(1),
-  //   marginBottom: theme.spacing(1)
-  // }
 }));
 
 function getSteps() {
   return ["", "", ""];
 }
 
-// function getStepContent(step) {
-//   switch (step) {
-//     case 0:
-//       return "Select campaign settings...";
-//     case 1:
-//       return "What is an ad group anyways?";
-//     case 2:
-//       return "This is the bit I really care about!";
-//     default:
-//       return "Unknown step";
-//   }
-// }
 function getStepContent(step) {
   switch (step) {
     case 0:
-      return <CostPage />;
+      return <test />;
     case 1:
-      return <FormPage />;
+      return "What is an ad group anyways?";
     case 2:
-      return <SubmittedPage />;
+      return "This is the bit I really care about!";
     default:
       return "Unknown step";
   }
 }
+// function getStepContent(step) {
+//   switch (step) {
+//     case 0:
+//       return <CostPage />;
+//     case 1:
+//       return <FormPage />;
+//     case 2:
+//       return <SubmittedPage />;
+//     default:
+//       return "Unknown step";
+//   }
+// }
+
 export default function StepperTesting() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
