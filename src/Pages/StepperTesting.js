@@ -1,52 +1,20 @@
-import React from "react";
-import { makeStyles } from "@mui/styles";
-import { Stepper, Step, StepLabel, Button, Typography } from "@mui/material";
-// Import component
-import test from "./test";
-import CostDetail from "./CostDetail";
-import FormPages from "./FormPages/Form";
-import SubmittedPageS from "./SubmittedPages";
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Stepper from "@mui/material/Stepper";
+import Step from "@mui/material/Step";
+import StepLabel from "@mui/material/StepLabel";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: "100%",
-  },
-}));
+const steps = [
+  "Select campaign settings",
+  "Create an ad group",
+  "Create an ad",
+];
 
-function getSteps() {
-  return ["", "", ""];
-}
-
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return <test />;
-    case 1:
-      return "What is an ad group anyways?";
-    case 2:
-      return "This is the bit I really care about!";
-    default:
-      return "Unknown step";
-  }
-}
-// function getStepContent(step) {
-//   switch (step) {
-//     case 0:
-//       return <CostPage />;
-//     case 1:
-//       return <FormPage />;
-//     case 2:
-//       return <SubmittedPage />;
-//     default:
-//       return "Unknown step";
-//   }
-// }
-
-export default function StepperTesting() {
-  const classes = useStyles();
+export default function HorizontalLinearStepper() {
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
-  const steps = getSteps();
 
   const isStepOptional = (step) => {
     return step === 1;
@@ -91,7 +59,7 @@ export default function StepperTesting() {
   };
 
   return (
-    <div className={classes.root}>
+    <Box sx={{ width: "100%" }}>
       <Stepper activeStep={activeStep}>
         {steps.map((label, index) => {
           const stepProps = {};
@@ -111,52 +79,41 @@ export default function StepperTesting() {
           );
         })}
       </Stepper>
-      <div>
-        {activeStep === steps.length ? (
-          <div>
-            <Typography className={classes.instructions}>
-              All steps completed - you&apos;re finished
-            </Typography>
-            <Button onClick={handleReset} className={classes.button}>
-              Reset
+      {activeStep === steps.length ? (
+        <React.Fragment>
+          <Typography sx={{ mt: 2, mb: 1 }}>
+            All steps completed - you&apos;re finished
+          </Typography>
+          <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+            <Box sx={{ flex: "1 1 auto" }} />
+            <Button onClick={handleReset}>Reset</Button>
+          </Box>
+        </React.Fragment>
+      ) : (
+        <React.Fragment>
+          <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>
+          <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+            <Button
+              color="inherit"
+              disabled={activeStep === 0}
+              onClick={handleBack}
+              sx={{ mr: 1 }}
+            >
+              Back
             </Button>
-          </div>
-        ) : (
-          <div>
-            <Typography className={classes.instructions}>
-              {getStepContent(activeStep)}
-            </Typography>
-            <div>
-              <Button
-                disabled={activeStep === 0}
-                onClick={handleBack}
-                className={classes.button}
-              >
-                Back
+            <Box sx={{ flex: "1 1 auto" }} />
+            {isStepOptional(activeStep) && (
+              <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
+                Skip
               </Button>
-              {isStepOptional(activeStep) && (
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={handleSkip}
-                  className={classes.button}
-                >
-                  Skip
-                </Button>
-              )}
+            )}
 
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={handleNext}
-                className={classes.button}
-              >
-                {activeStep === steps.length - 1 ? "Finish" : "Next"}
-              </Button>
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
+            <Button onClick={handleNext}>
+              {activeStep === steps.length - 1 ? "Finish" : "Next"}
+            </Button>
+          </Box>
+        </React.Fragment>
+      )}
+    </Box>
   );
 }

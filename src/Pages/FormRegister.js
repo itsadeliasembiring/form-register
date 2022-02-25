@@ -1,58 +1,62 @@
 import React from "react";
 import { makeStyles } from "@mui/styles";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Stepper, Step, StepLabel, Button, Typography } from "@mui/material";
 // Import component
-import CostPage from "./CostPage";
-import FormPage from "./FormPage";
-import SubmittedPage from "./SubmittedPage";
+import test from "./test";
+import CostDetail from "./CostDetail";
+import FormPages from "./FormPages/Form";
+import SubmittedPages from "./SubmittedPages";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: "90%",
+    width: "100%",
   },
-  // button: {
-  //   marginRight: theme.spacing(1),
-  // },
-  // instructions: {
-  //   marginTop: theme.spacing(1),
-  //   marginBottom: theme.spacing(1),
-  // },
 }));
 
 function getSteps() {
-  return ["Select campaign settings", "Create an ad group", "Create an ad"];
+  return ["", "", ""];
 }
 
-// Isi Step
+// function getStepContent(step) {
+//   switch (step) {
+//     case 0:
+//       return "Content 1";
+//     case 1:
+//       return "Content 2";
+//     case 2:
+//       return "Content 3";
+//     default:
+//       return "Unknown step";
+//   }
+// }
 function getStepContent(step) {
   switch (step) {
     case 0:
-      return <CostPage />;
+      return <CostDetail />;
     case 1:
-      return <FormPage />;
+      return <FormPages />;
     case 2:
-      return <SubmittedPage />;
+      return <SubmittedPages />;
     default:
-      return "Content 4";
+      return "Unknown step";
   }
 }
-const theme = createTheme();
-function FormRegister() {
+
+export default function StepperTesting() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
   const steps = getSteps();
 
-  function isStepOptional(step) {
+  const isStepOptional = (step) => {
     return step === 1;
-  }
+  };
 
-  function isStepSkipped(step) {
+  const isStepSkipped = (step) => {
     return skipped.has(step);
-  }
+  };
 
-  function handleNext() {
+  const handleNext = () => {
     let newSkipped = skipped;
     if (isStepSkipped(activeStep)) {
       newSkipped = new Set(newSkipped.values());
@@ -61,16 +65,14 @@ function FormRegister() {
 
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     setSkipped(newSkipped);
-  }
+  };
 
-  function handleBack() {
+  const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  }
+  };
 
-  function handleSkip() {
+  const handleSkip = () => {
     if (!isStepOptional(activeStep)) {
-      // You probably want to guard against something like this,
-      // it should never occur unless someone's actively trying to break something.
       throw new Error("You can't skip a step that isn't optional.");
     }
 
@@ -80,11 +82,11 @@ function FormRegister() {
       newSkipped.add(activeStep);
       return newSkipped;
     });
-  }
+  };
 
-  function handleReset() {
+  const handleReset = () => {
     setActiveStep(0);
-  }
+  };
 
   return (
     <div className={classes.root}>
@@ -119,9 +121,7 @@ function FormRegister() {
           </div>
         ) : (
           <div>
-            <Typography className={classes.instructions}>
-              {getStepContent(activeStep)}
-            </Typography>
+            {getStepContent(activeStep)}
             <div>
               <Button
                 disabled={activeStep === 0}
@@ -140,6 +140,7 @@ function FormRegister() {
                   Skip
                 </Button>
               )}
+
               <Button
                 variant="contained"
                 color="primary"
@@ -155,5 +156,3 @@ function FormRegister() {
     </div>
   );
 }
-
-export default FormRegister;

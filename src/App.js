@@ -1,10 +1,10 @@
 import React from "react";
-import Stepper from "./Pages/StepperTesting";
+import FormRegister from "./Pages/FormRegister";
 
 function App() {
   return (
     <div className="App">
-      <Stepper />
+      <FormRegister />
     </div>
   );
 }

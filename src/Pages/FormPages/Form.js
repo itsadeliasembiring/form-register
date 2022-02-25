@@ -149,7 +149,7 @@ export default function Form() {
                 inputProps={{
                   style: {
                     fontSize: 12,
-                    height: 50,
+                    height: 60,
                   },
                 }}
                 sx={{

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // Import Component MUI
 import {
   Card,
@@ -23,25 +23,31 @@ export default function Cards() {
   const [seragam, setSeragam] = useState(false);
   const handleChangeSeragam = () => {
     setSeragam(!seragam);
+    const totalseragam = Seragam.reduce(
+      (total, currentItem) => (total = total + currentItem.price),
+      0
+    );
+    console.log(totalseragam);
+    setTotal(totalseragam + total);
   };
   const [sabuk, setSabuk] = useState(false);
   const handleChangeSabuk = () => {
     setSabuk(!sabuk);
+    const totalsabuk = Sabuk.reduce(
+      (total, currentItem) => (total = total + currentItem.price),
+      0
+    );
+    setTotal(totalsabuk + total);
   };
-  // Total Cost
-  const totalbiayaIuran = BiayaIuran.reduce(
-    (total, currentItem) => (total = total + currentItem.price),
-    0
-  );
-  const totalseragam = Seragam.reduce(
-    (total, currentItem) => (total = total + currentItem.price),
-    0
-  );
-  const totalsabuk = Sabuk.reduce(
-    (total, currentItem) => (total = total + currentItem.price),
-    0
-  );
-  const total = totalbiayaIuran + totalseragam + totalsabuk;
+
+  const [total, setTotal] = useState(0);
+  useEffect(() => {
+    const totalbiayaIuran = BiayaIuran.reduce(
+      (total, currentItem) => (total = total + currentItem.price),
+      0
+    );
+    setTotal(totalbiayaIuran);
+  }, []);
 
   return (
     <>
