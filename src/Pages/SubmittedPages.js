@@ -3,7 +3,6 @@ import React from "react";
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 // Import Component
-import Navbar from "../Component/Navbar";
 import Colors from "../Theme/Color";
 // Import Icon
 import QrCode2Icon from "@mui/icons-material/QrCode2";
@@ -35,12 +34,11 @@ const icon = {
   width: 140,
   height: 140,
 };
-export default function SubmittedPages() {
+const SubmittedPages = () => {
   return (
     <>
       <Container justifyContent="center" alignItems="center">
-        <Navbar>Pendaftaran</Navbar>
-        <Box mt={10} justifyContent="center" alignItems="center">
+        <Box justifyContent="center" alignItems="center">
           <Typography mt={3} sx={fontTitle}>
             Scan QRCode berikut:
           </Typography>
@@ -71,4 +69,5 @@ export default function SubmittedPages() {
       </Container>
     </>
   );
-}
+};
+export default SubmittedPages;

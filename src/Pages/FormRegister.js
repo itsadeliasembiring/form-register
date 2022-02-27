@@ -2,11 +2,10 @@ import React from "react";
 import { makeStyles } from "@mui/styles";
 import { Stepper, Step, StepLabel, Button, Typography } from "@mui/material";
 // Import component
-import test from "./test";
-import CostDetail from "./CostDetail";
+import CostDetailPages from "./CostDetail";
 import FormPages from "./FormPages/Form";
 import SubmittedPages from "./SubmittedPages";
-
+import Navbar from "../Component/Navbar";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -17,29 +16,8 @@ function getSteps() {
   return ["", "", ""];
 }
 
-// function getStepContent(step) {
-//   switch (step) {
-//     case 0:
-//       return "Content 1";
-//     case 1:
-//       return "Content 2";
-//     case 2:
-//       return "Content 3";
-//     default:
-//       return "Unknown step";
-//   }
-// }
 function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return <CostDetail />;
-    case 1:
-      return <FormPages />;
-    case 2:
-      return <SubmittedPages />;
-    default:
-      return "Unknown step";
-  }
+  console.log(step);
 }
 
 export default function StepperTesting() {
@@ -49,6 +27,10 @@ export default function StepperTesting() {
   const steps = getSteps();
 
   const isStepOptional = (step) => {
+    return step === 1;
+  };
+
+  const isStepBack = (step) => {
     return step === 1;
   };
 
@@ -90,7 +72,9 @@ export default function StepperTesting() {
 
   return (
     <div className={classes.root}>
-      <Stepper activeStep={activeStep}>
+      {/* <Navbar>Pendaftaran</Navbar> */}
+
+      <Stepper activeStep={activeStep} mt={10}>
         {steps.map((label, index) => {
           const stepProps = {};
           const labelProps = {};
@@ -109,6 +93,7 @@ export default function StepperTesting() {
           );
         })}
       </Stepper>
+
       <div>
         {activeStep === steps.length ? (
           <div>
@@ -121,15 +106,24 @@ export default function StepperTesting() {
           </div>
         ) : (
           <div>
-            {getStepContent(activeStep)}
+            {activeStep === 0 ? (
+              <CostDetailPages />
+            ) : activeStep === 1 ? (
+              <FormPages />
+            ) : (
+              <SubmittedPages />
+            )}
             <div>
-              <Button
-                disabled={activeStep === 0}
-                onClick={handleBack}
-                className={classes.button}
-              >
-                Back
-              </Button>
+              {/* BACK BUTTON */}
+              {isStepBack(activeStep) && (
+                <Button
+                  disabled={activeStep === 0}
+                  onClick={handleBack}
+                  className={classes.button}
+                >
+                  Back
+                </Button>
+              )}
               {isStepOptional(activeStep) && (
                 <Button
                   variant="contained"

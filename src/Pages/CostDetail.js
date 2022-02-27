@@ -1,12 +1,12 @@
 import React from "react";
 // Import Component MUI
 import { Box, Button, Container, Grid } from "@mui/material";
-// Import Component
-import Navbar from "../Component/Navbar";
 import Card from "../Component/CostCard/Card";
 import Colors from "../Theme/Color";
+// Import Data
+import { BiayaIuran, Seragam, Sabuk } from "../Component/CostCard/Data";
 
-export default function CostDetail() {
+const CostDetail = () => {
   // Styles
   const buttonStyles = {
     color: Colors.white,
@@ -25,19 +25,17 @@ export default function CostDetail() {
   return (
     <>
       <Container>
-        <Navbar>Pendaftaran</Navbar>
-        <Box mt={10}>
-          <Card />
+        <Box>
+          <Card BiayaIuran={BiayaIuran} Seragam={Seragam} Sabuk={Sabuk} />
           <Grid Container>
             <Grid item xs={12} sx={{ mt: 20 }}>
               {/* Button  */}
-              <Button onClick sx={buttonStyles}>
-                Lanjut
-              </Button>
+              <Button sx={buttonStyles}>Lanjut</Button>
             </Grid>
           </Grid>
         </Box>
       </Container>
     </>
   );
-}
+};
+export default CostDetail;

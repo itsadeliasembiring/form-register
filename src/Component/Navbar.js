@@ -1,7 +1,7 @@
 import React from "react";
 // Import Component MUI
 import { AppBar, Box, IconButton, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
+
 // Import Icon
 import ArrowBackTwoToneIcon from "@mui/icons-material/ArrowBackTwoTone";
 // Import Theme
@@ -11,8 +11,7 @@ export default function Navbar(props) {
   return (
     <>
       <AppBar
-        position="fixed"
-        elevation="none"
+        elevation={"none"}
         sx={{
           width: "100%",
           height: "55px",
@@ -28,20 +27,19 @@ export default function Navbar(props) {
           }}
         >
           {/* Icon */}
-          <Link to="/" style={{ background: "transparent" }}>
-            {/* Icon */}
-            <IconButton
-              onClick
-              sx={{
-                pt: 1.5,
-                mr: 0.5,
-                ml: 0.5,
-                color: Colors.white,
-              }}
-            >
-              <ArrowBackTwoToneIcon sx={{ fontSize: 30 }} />
-            </IconButton>
-          </Link>
+
+          {/* Icon */}
+          <IconButton
+            onClick
+            sx={{
+              pt: 1.5,
+              mr: 0.5,
+              ml: 0.5,
+              color: Colors.white,
+            }}
+          >
+            <ArrowBackTwoToneIcon sx={{ fontSize: 30 }} />
+          </IconButton>
 
           {/* Title */}
           <Typography sx={{ fontSize: 18, pt: 1.7 }}>

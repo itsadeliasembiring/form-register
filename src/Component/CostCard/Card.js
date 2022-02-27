@@ -14,10 +14,10 @@ import {
 // Import Theme & Styles
 import Colors from "../../Theme/Color";
 import { useStyles, cardStyles, fontTitle, fontSize } from "./Styles";
-// Import Data
-import { BiayaIuran, Seragam, Sabuk } from "./Data";
 
-export default function Cards() {
+export default function Cards(props) {
+  const { BiayaIuran, Seragam, Sabuk } = props;
+  console.log(props);
   const classes = useStyles();
   // State Checkbox Optional Cost
   const [seragam, setSeragam] = useState(false);
@@ -28,7 +28,11 @@ export default function Cards() {
       0
     );
     console.log(totalseragam);
-    setTotal(totalseragam + total);
+    if (seragam) {
+      setTotal(total - totalseragam);
+    } else {
+      setTotal(totalseragam + total);
+    }
   };
   const [sabuk, setSabuk] = useState(false);
   const handleChangeSabuk = () => {
@@ -37,7 +41,11 @@ export default function Cards() {
       (total, currentItem) => (total = total + currentItem.price),
       0
     );
-    setTotal(totalsabuk + total);
+    if (sabuk) {
+      setTotal(total - totalsabuk);
+    } else {
+      setTotal(totalsabuk + total);
+    }
   };
 
   const [total, setTotal] = useState(0);
@@ -51,7 +59,7 @@ export default function Cards() {
 
   return (
     <>
-      <Card sx={cardStyles} maxHeight={215}>
+      <Card sx={cardStyles} maxHeight={210}>
         <CardContent className={classes.cardContent}>
           <Typography sx={fontTitle} gutterBottom>
             Informasi Biaya

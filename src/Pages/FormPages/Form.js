@@ -18,8 +18,7 @@ import {
 } from "@mui/material";
 // Import icon
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-// Import Component
-import Navbar from "../../Component/Navbar";
+
 import {
   useStyles,
   fontTitle,
@@ -31,7 +30,7 @@ import {
   profile,
 } from "./Styles";
 
-export default function Form() {
+const Form = () => {
   const classes = useStyles();
   // State Checkbox Optional Cost
   const [terdaftar, setTerdaftar] = useState(false);
@@ -51,8 +50,7 @@ export default function Form() {
   return (
     <>
       <Container>
-        <Navbar>Pendaftaran</Navbar>
-        <Box mt={10}>
+        <Box>
           <Typography sx={fontTitle} gutterBottom>
             Lengkapi Data
           </Typography>
@@ -422,4 +420,5 @@ export default function Form() {
       </Container>
     </>
   );
-}
+};
+export default Form;
