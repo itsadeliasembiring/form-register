@@ -11,12 +11,6 @@ export const useStyles = makeStyles(() => ({
   labelCheckbox: {
     fontSize: "15px",
   },
-  cardContent: {
-    padding: "16px",
-    "&:last-child": {
-      paddingBottom: "15px",
-    },
-  },
   iconSize: {
     width: 24,
     height: 24,
@@ -30,9 +24,16 @@ export const useStyles = makeStyles(() => ({
 
 export const cardStyles = {
   width: "100%",
-  mt: 5,
+  mt: 3,
   borderRadius: 2,
   boxShadow: "0px 0px 6px #a1a1a1",
+};
+
+export const cardContent = {
+  padding: "16px",
+  "&:last-child": {
+    paddingBottom: "16px",
+  },
 };
 
 export const fontTitle = {

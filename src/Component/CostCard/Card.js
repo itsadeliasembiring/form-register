@@ -13,7 +13,13 @@ import {
 } from "@mui/material";
 // Import Theme & Styles
 import Colors from "../../Theme/Color";
-import { useStyles, cardStyles, fontTitle, fontSize } from "./Styles";
+import {
+  useStyles,
+  cardStyles,
+  cardContent,
+  fontTitle,
+  fontSize,
+} from "./Styles";
 
 export default function Cards(props) {
   const { BiayaIuran, Seragam, Sabuk } = props;
@@ -27,7 +33,6 @@ export default function Cards(props) {
       (total, currentItem) => (total = total + currentItem.price),
       0
     );
-    console.log(totalseragam);
     if (seragam) {
       setTotal(total - totalseragam);
     } else {
@@ -47,7 +52,7 @@ export default function Cards(props) {
       setTotal(totalsabuk + total);
     }
   };
-
+  // Total
   const [total, setTotal] = useState(0);
   useEffect(() => {
     const totalbiayaIuran = BiayaIuran.reduce(
@@ -60,7 +65,7 @@ export default function Cards(props) {
   return (
     <>
       <Card sx={cardStyles} maxHeight={210}>
-        <CardContent className={classes.cardContent}>
+        <CardContent sx={cardContent}>
           <Typography sx={fontTitle} gutterBottom>
             Informasi Biaya
           </Typography>
@@ -174,7 +179,7 @@ export default function Cards(props) {
 
       {/* Optional Cost Card*/}
       <Card sx={cardStyles} height={140}>
-        <CardContent>
+        <CardContent sx={cardContent}>
           <Typography sx={fontTitle}>Biaya Tambahan</Typography>
 
           <FormGroup>

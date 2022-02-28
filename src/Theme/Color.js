@@ -5,7 +5,6 @@ const Colors = {
   orange: "#F78104",
   gray: "#808080",
   lightGray: "#D3D3D3",
-  navbarColor: "#249EA0",
 };
 
 export default Colors;

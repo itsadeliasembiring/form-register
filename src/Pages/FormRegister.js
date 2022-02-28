@@ -1,23 +1,57 @@
 import React from "react";
 import { makeStyles } from "@mui/styles";
-import { Stepper, Step, StepLabel, Button, Typography } from "@mui/material";
+import {
+  Button,
+  Box,
+  Container,
+  Stepper,
+  Step,
+  StepLabel,
+  Typography,
+  Grid,
+} from "@mui/material";
 // Import component
-import CostDetailPages from "./CostDetail";
+import CostPages from "./CostPages/Cost";
 import FormPages from "./FormPages/Form";
-import SubmittedPages from "./SubmittedPages";
-import Navbar from "../Component/Navbar";
+import ScanPages from "./ScanPages/Scan";
+import SubmittedPages from "./SubmittedPages/Submitted";
+import Navbar from "../Component/Navbar/Navbar";
+import Colors from "../Theme/Color";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
   },
 }));
 
+const backButton = {
+  color: Colors.white,
+  backgroundColor: Colors.seaGreen,
+  "&:hover": {
+    backgroundColor: Colors.seaGreen,
+  },
+  width: "100%",
+  height: 40,
+  fontSize: 14,
+  textTransform: "capitalize",
+  textDecoration: "none",
+};
+const nextButton = {
+  color: Colors.white,
+  backgroundColor: Colors.orange,
+  "&:hover": {
+    backgroundColor: Colors.orange,
+  },
+  width: "100%",
+  height: 40,
+  fontSize: 14,
+  textTransform: "capitalize",
+  textDecoration: "none",
+};
+
+// Label Step
 function getSteps() {
   return ["", "", ""];
-}
-
-function getStepContent(step) {
-  console.log(step);
 }
 
 export default function StepperTesting() {
@@ -25,10 +59,6 @@ export default function StepperTesting() {
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
   const steps = getSteps();
-
-  const isStepOptional = (step) => {
-    return step === 1;
-  };
 
   const isStepBack = (step) => {
     return step === 1;
@@ -53,100 +83,77 @@ export default function StepperTesting() {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  const handleSkip = () => {
-    if (!isStepOptional(activeStep)) {
-      throw new Error("You can't skip a step that isn't optional.");
-    }
-
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped((prevSkipped) => {
-      const newSkipped = new Set(prevSkipped.values());
-      newSkipped.add(activeStep);
-      return newSkipped;
-    });
-  };
-
   const handleReset = () => {
     setActiveStep(0);
   };
 
   return (
-    <div className={classes.root}>
-      {/* <Navbar>Pendaftaran</Navbar> */}
+    <>
+      <Navbar>Pendaftaran</Navbar>
+      <Container>
+        {/* Stepper */}
+        <Box mt={9} mb={0}>
+          <Stepper activeStep={activeStep}>
+            {steps.map((label, index) => {
+              const stepProps = {};
+              const labelProps = {};
+              if (isStepSkipped(index)) {
+                stepProps.completed = false;
+              }
+              return (
+                <Step key={label} {...stepProps}>
+                  <StepLabel {...labelProps}>{label}</StepLabel>
+                </Step>
+              );
+            })}
+          </Stepper>
+        </Box>
 
-      <Stepper activeStep={activeStep} mt={10}>
-        {steps.map((label, index) => {
-          const stepProps = {};
-          const labelProps = {};
-          if (isStepOptional(index)) {
-            labelProps.optional = (
-              <Typography variant="caption">Optional</Typography>
-            );
-          }
-          if (isStepSkipped(index)) {
-            stepProps.completed = false;
-          }
-          return (
-            <Step key={label} {...stepProps}>
-              <StepLabel {...labelProps}>{label}</StepLabel>
-            </Step>
-          );
-        })}
-      </Stepper>
-
-      <div>
-        {activeStep === steps.length ? (
+        {/* Content */}
+        <Box>
           <div>
-            <Typography className={classes.instructions}>
-              All steps completed - you&apos;re finished
-            </Typography>
-            <Button onClick={handleReset} className={classes.button}>
-              Reset
-            </Button>
-          </div>
-        ) : (
-          <div>
-            {activeStep === 0 ? (
-              <CostDetailPages />
-            ) : activeStep === 1 ? (
-              <FormPages />
+            {activeStep === steps.length ? (
+              // Submitted Pages
+              <div>
+                <SubmittedPages />
+                {/* Homapage Button */}
+                <Button onClick={handleReset} sx={backButton}>
+                  Kembali ke Beranda
+                </Button>
+              </div>
             ) : (
-              <SubmittedPages />
+              // Switch Pages
+              <div>
+                {activeStep === 0 ? (
+                  <CostPages />
+                ) : activeStep === 1 ? (
+                  <FormPages />
+                ) : (
+                  <ScanPages />
+                )}
+                <div>
+                  <Grid container spacing={1} mt={5} mb={3} alignItems="center">
+                    {isStepBack(activeStep) && (
+                      <Grid item xs={6}>
+                        {/* BACK BUTTON */}
+                        <Button onClick={handleBack} sx={backButton}>
+                          Kembali
+                        </Button>
+                      </Grid>
+                    )}
+                    <Grid item xs>
+                      {/*  NEXT BUTTON  */}
+                      <Button sx={nextButton} onClick={handleNext}>
+                        {activeStep === steps.length - 1 ? "Selesai" : "Lanjut"}
+                      </Button>
+                    </Grid>
+                  </Grid>
+                </div>
+              </div>
             )}
-            <div>
-              {/* BACK BUTTON */}
-              {isStepBack(activeStep) && (
-                <Button
-                  disabled={activeStep === 0}
-                  onClick={handleBack}
-                  className={classes.button}
-                >
-                  Back
-                </Button>
-              )}
-              {isStepOptional(activeStep) && (
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={handleSkip}
-                  className={classes.button}
-                >
-                  Skip
-                </Button>
-              )}
-
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={handleNext}
-                className={classes.button}
-              >
-                {activeStep === steps.length - 1 ? "Finish" : "Next"}
-              </Button>
-            </div>
           </div>
-        )}
-      </div>
-    </div>
+        </Box>
+      </Container>
+    </>
   );
 }
