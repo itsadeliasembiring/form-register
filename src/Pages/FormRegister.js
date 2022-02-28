@@ -1,5 +1,6 @@
 import React from "react";
 import { makeStyles } from "@mui/styles";
+import { styled } from "@mui/material/styles";
 import {
   Button,
   Box,
@@ -7,8 +8,8 @@ import {
   Stepper,
   Step,
   StepLabel,
-  Typography,
   Grid,
+  StepConnector,
 } from "@mui/material";
 // Import component
 import CostPages from "./CostPages/Cost";
@@ -18,9 +19,43 @@ import SubmittedPages from "./SubmittedPages/Submitted";
 import Navbar from "../Component/Navbar/Navbar";
 import Colors from "../Theme/Color";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: "100%",
+const useStyles = makeStyles(() => ({
+  step: {
+    "& .MuiStepIcon-text": {
+      fontSize: 12,
+    },
+    "& .MuiSvgIcon-root.MuiStepIcon-root": {
+      width: 32,
+      height: 32,
+      border: "0.5px solid",
+      borderRadius: "100%",
+      borderColor: Colors.gray,
+      color: Colors.lightGray,
+    },
+    "& .MuiStepLabel-root .Mui-active": {
+      color: Colors.seaGreen,
+      backgroundColor: Colors.seaGreen,
+      border: "0.5px solid",
+      borderRadius: "100%",
+      borderColor: Colors.seaGreenDark,
+    },
+    "& .MuiStepLabel-root.Mui-completed": {
+      backgroundColor: Colors.stepColor,
+    },
+    "& .MuiSvgIcon-root.Mui-completed": {
+      borderColor: Colors.seaGreenDark,
+      backgroundColor: Colors.seaGreen,
+    },
+    "& .MuiSvgIcon-root.MuiStepIcon-root.Mui-completed": {
+      color: Colors.aqua,
+    },
+  },
+  connectorLine: {
+    "& 	.MuiStepConnector-line": {
+      borderColor: Colors.connectorColor,
+      borderTopWidth: 3,
+      borderRadius: 7,
+    },
   },
 }));
 
@@ -35,6 +70,7 @@ const backButton = {
   fontSize: 14,
   textTransform: "capitalize",
   textDecoration: "none",
+  bottom: 0,
 };
 const nextButton = {
   color: Colors.white,
@@ -47,6 +83,7 @@ const nextButton = {
   fontSize: 14,
   textTransform: "capitalize",
   textDecoration: "none",
+  bottom: 0,
 };
 
 // Label Step
@@ -92,22 +129,25 @@ export default function StepperTesting() {
       <Navbar>Pendaftaran</Navbar>
       <Container>
         {/* Stepper */}
-        <Box mt={9} mb={0}>
-          <Stepper activeStep={activeStep}>
-            {steps.map((label, index) => {
-              const stepProps = {};
-              const labelProps = {};
-              if (isStepSkipped(index)) {
-                stepProps.completed = false;
-              }
-              return (
-                <Step key={label} {...stepProps}>
-                  <StepLabel {...labelProps}>{label}</StepLabel>
-                </Step>
-              );
-            })}
-          </Stepper>
-        </Box>
+
+        <Stepper
+          activeStep={activeStep}
+          sx={{ width: "100%", mt: 9 }}
+          connector={<StepConnector className={classes.connectorLine} />}
+        >
+          {steps.map((label, index) => {
+            const stepProps = {};
+            const labelProps = {};
+            if (isStepSkipped(index)) {
+              stepProps.completed = false;
+            }
+            return (
+              <Step key={label} {...stepProps} className={classes.step}>
+                <StepLabel {...labelProps}>{label}</StepLabel>
+              </Step>
+            );
+          })}
+        </Stepper>
 
         {/* Content */}
         <Box>
@@ -116,10 +156,14 @@ export default function StepperTesting() {
               // Submitted Pages
               <div>
                 <SubmittedPages />
-                {/* Homapage Button */}
-                <Button onClick={handleReset} sx={backButton}>
-                  Kembali ke Beranda
-                </Button>
+                {/* Homepage Button */}
+                <Grid container spacing={1} mt={25} mb={3} alignItems="center">
+                  <Grid item xs={12}>
+                    <Button onClick={handleReset} sx={backButton}>
+                      Kembali ke Beranda
+                    </Button>
+                  </Grid>
+                </Grid>
               </div>
             ) : (
               // Switch Pages

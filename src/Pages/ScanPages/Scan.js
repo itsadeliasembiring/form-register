@@ -17,6 +17,7 @@ const Scan = () => {
         textAlign="center"
         justifyContent="center"
         alignItems="center"
+        mb={15}
       >
         <Grid item xs={12}>
           <QrCode2Icon sx={icon} />
