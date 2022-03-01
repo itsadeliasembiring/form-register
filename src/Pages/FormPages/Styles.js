@@ -72,7 +72,7 @@ export const fontSubTitle = {
 
 export const calendar = {
   color: Colors.seaGreen,
-  width: 133,
+  width: "94%",
   height: 30,
   borderRadius: 7,
   border: "1.5px solid #d3d3d3",

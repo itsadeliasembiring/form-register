@@ -133,7 +133,16 @@ table {
 /* body {
   font-family: "Roboto", sans-serif;
 } */
-
-.calendar input:active {
+input[type="date"] {
+  padding: 0 3px;
+  outline: none;
+}
+input[type="date"]::after {
+  border-color: #249ea0;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+  color: #249ea0;
+}
+input[type="date"]:active {
   border-color: #d3d3d3;
 }

@@ -16,14 +16,12 @@ import {
 } from "@mui/material";
 // Import icon
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-
+import Profile from "../../Component/PreviewImage";
 import {
   useStyles,
   fontTitle,
   calendar,
   fontSubTitle,
-  backButton,
-  nextButton,
   uploadButton,
   profile,
 } from "./Styles";
@@ -47,14 +45,18 @@ const Form = () => {
 
   return (
     <>
-      <Typography sx={fontTitle} gutterBottom>
-        Lengkapi Data
-      </Typography>
+      <Grid container mt={1}>
+        <Grid item>
+          <Typography sx={fontTitle} gutterBottom>
+            Lengkapi Data
+          </Typography>
+        </Grid>
+      </Grid>
 
-      <Grid container direction={"row"} spacing={3}>
+      <Grid container direction={"row"} spacing={2}>
         {/* Profil */}
-        <Grid item xs={3}>
-          <AccountCircleIcon sx={profile} />
+        <Grid item xs={3.5}>
+          <Profile />
         </Grid>
         <Grid item xs>
           {/* Name */}
@@ -72,7 +74,7 @@ const Form = () => {
           </Grid>
           {/* Gender */}
           <Grid item mt={1}>
-            <FormControl className={classes.genderLabel}>
+            <FormControl className={classes.genderLabel} row={true}>
               <FormLabel id="gender">Jenis Kelamin</FormLabel>
               <RadioGroup row aria-labelledby="gender">
                 <FormControlLabel
@@ -94,7 +96,7 @@ const Form = () => {
       </Grid>
 
       <Grid container direction="row" alignItems="center" spacing={1}>
-        <Grid item xs={7}>
+        <Grid item xs={6}>
           {/* Place of birth */}
           <TextField
             placeholder="Tempat Lahir"
@@ -108,7 +110,7 @@ const Form = () => {
           ></TextField>
         </Grid>
         {/* Birthdate */}
-        <Grid item xs alignItems={"right"} justifyContent={"center"}>
+        <Grid item justifyContent={"center"} xs={6}>
           <input type="date" className="calendar" style={calendar} />
         </Grid>
       </Grid>
