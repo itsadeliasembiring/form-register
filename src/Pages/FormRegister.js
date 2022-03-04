@@ -97,8 +97,14 @@ export default function StepperTesting() {
   const [skipped, setSkipped] = React.useState(new Set());
   const steps = getSteps();
 
-  const isStepBack = (step) => {
+  const isStepNext = (step) => {
+    return step === 0;
+  };
+  const isStepSubmitBack = (step) => {
     return step === 1;
+  };
+  const isStepFinish = (step) => {
+    return step === 2;
   };
 
   const isStepSkipped = (step) => {
@@ -176,21 +182,45 @@ export default function StepperTesting() {
                   <ScanPages />
                 )}
                 <div>
-                  <Grid container spacing={1} mt={5} mb={3} alignItems="center">
-                    {isStepBack(activeStep) && (
+                  {isStepSubmitBack(activeStep) && (
+                    <Grid
+                      container
+                      spacing={1}
+                      mt={5}
+                      alignItems="center"
+                      direction={"row"}
+                    >
+                      {/* BACK BUTTON */}
                       <Grid item xs={6}>
-                        {/* BACK BUTTON */}
                         <Button onClick={handleBack} sx={backButton}>
                           Kembali
                         </Button>
                       </Grid>
-                    )}
-                    <Grid item xs>
-                      {/*  NEXT BUTTON  */}
-                      <Button sx={nextButton} onClick={handleNext}>
-                        {activeStep === steps.length - 1 ? "Selesai" : "Lanjut"}
-                      </Button>
+                      {/* SUBMIT BUTTON */}
+                      <Grid item xs>
+                        <Button onClick={handleNext} sx={nextButton}>
+                          Submit
+                        </Button>
+                      </Grid>
                     </Grid>
+                  )}
+
+                  <Grid container spacing={1} mt={5} mb={3} alignItems="center">
+                    {/*  NEXT BUTTON  */}
+                    {isStepNext(activeStep) && (
+                      <Grid item xs={12}>
+                        <Button onClick={handleNext} sx={nextButton}>
+                          Lanjut
+                        </Button>
+                      </Grid>
+                    )}
+                    {isStepFinish(activeStep) && (
+                      <Grid item xs={12}>
+                        <Button onClick={handleNext} sx={nextButton}>
+                          Finish
+                        </Button>
+                      </Grid>
+                    )}
                   </Grid>
                 </div>
               </div>
