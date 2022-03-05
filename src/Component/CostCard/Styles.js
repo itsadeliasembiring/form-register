@@ -8,6 +8,9 @@ export const useStyles = makeStyles(() => ({
       color: Colors.seaGreen,
     },
   },
+  dividerColor: {
+    backgroundColor: Colors.lightGray,
+  },
   labelCheckbox: {
     fontSize: "15px",
   },
@@ -20,6 +23,7 @@ export const useStyles = makeStyles(() => ({
     alignItems: "center",
     marginBottom: 1,
   },
+  total: { color: Colors.seaGreen },
 }));
 
 export const cardStyles = {
@@ -43,4 +47,18 @@ export const fontTitle = {
 
 export const fontSize = {
   fontSize: 15,
+};
+
+export const nextButton = {
+  color: Colors.white,
+  backgroundColor: Colors.orange,
+  "&:hover": {
+    backgroundColor: Colors.orange,
+  },
+  width: "100%",
+  height: 40,
+  fontSize: 14,
+  textTransform: "capitalize",
+  textDecoration: "none",
+  bottom: 0,
 };

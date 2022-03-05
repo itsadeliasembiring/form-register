@@ -1,5 +1,5 @@
 import React from "react";
-import FormRegister from "./Pages/FormRegister";
+import FormRegister from "./Pages/FormRegister/FormRegister";
 
 function App() {
   return (

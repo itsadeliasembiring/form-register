@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 // Import Component MUI
 import {
   Button,
@@ -21,26 +21,16 @@ import {
   calendar,
   fontSubTitle,
   uploadButton,
-  profile,
+  backButton,
+  nextButton,
 } from "./Styles";
 
 const Form = (props) => {
   const classes = useStyles();
-  // State Checkbox Optional Cost
-  const [terdaftar, setTerdaftar] = useState(false);
-  const handleChangeTerdaftar = () => {
-    setTerdaftar(!terdaftar);
-  };
-  const [orangtua, setOrangtua] = useState(false);
-  const handleChangeOrangtua = () => {
-    setOrangtua(!orangtua);
-  };
-  // State Upload Ijazah
-  const [file, setFile] = useState("");
-  function handleUpload(event) {
-    setFile(event.target.files[0]);
-  }
   // State Form
+  const [terdaftar, setTerdaftar] = useState(false);
+  const [orangtua, setOrangtua] = useState(false);
+  const [file, setFile] = useState("");
   const [nama, setNama] = useState("");
   const [jeniskelamin, setJeniskelamin] = useState("");
   const [tempatlahir, setTempatlahir] = useState("");
@@ -58,20 +48,46 @@ const Form = (props) => {
   const [seragam, setSeragam] = useState("");
   const [ukuranseragam, setUkuranseragam] = useState("");
 
+  // Checkbox Optional Cost
+  const handleChangeTerdaftar = () => {
+    setTerdaftar(!terdaftar);
+  };
+  const handleChangeOrangtua = () => {
+    setOrangtua(!orangtua);
+  };
+  const filename = file.name;
+  // Upload Ijazah
+  function handleUpload(event) {
+    setFile(event.target.files[0]);
+  }
+  // Submit Button
   const handleSubmit = (event) => {
-    props.dataForm = {
+    const dataSend = {
       nama,
       jeniskelamin,
       tempatlahir,
+      tanggallahir,
+      alamat,
+      alasanmendaftar,
+      perguruan,
+      dojo,
+      pelatih,
+      ujianterakhir,
+      tingkatan,
+      filename,
+      namaorangtua,
+      teleponorangtua,
+      seragam,
+      ukuranseragam,
     };
+    props.parentCallback(dataSend);
     event.preventDefault();
   };
+  // Cancel Button
+  const handleCancel = () => {
+    props.parentCancel();
+  };
 
-  // useEffect(() => {
-  //   if (props.onClick) {
-  //     handleSubmit();
-  //   }
-  // }, []);
   return (
     <>
       <Grid container mt={1}>
@@ -461,6 +477,26 @@ const Form = (props) => {
                 />
               </RadioGroup>
             </FormControl>
+          </Grid>
+        </Grid>
+
+        {/* Button */}
+        <Grid
+          container
+          spacing={1}
+          mt={5}
+          alignItems="center"
+          direction={"row"}
+        >
+          <Grid item xs={6}>
+            <Button onClick={handleCancel} sx={backButton}>
+              Kembali
+            </Button>
+          </Grid>
+          <Grid item xs>
+            <Button onClick={handleSubmit} sx={nextButton}>
+              Submit
+            </Button>
           </Grid>
         </Grid>
       </form>

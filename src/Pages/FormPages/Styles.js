@@ -120,9 +120,3 @@ export const uploadButton = {
   textTransform: "capitalize",
   boxShadow: "none",
 };
-
-export const profile = {
-  width: 80,
-  height: 80,
-  color: Colors.seaGreen,
-};

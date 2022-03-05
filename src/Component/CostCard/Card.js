@@ -2,6 +2,7 @@ import * as React from "react";
 import { useState, useEffect } from "react";
 // Import Component MUI
 import {
+  Button,
   Card,
   CardContent,
   Checkbox,
@@ -11,22 +12,33 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-// Import Theme & Styles
-import Colors from "../../Theme/Color";
+// Import Styles
 import {
   useStyles,
   cardStyles,
   cardContent,
   fontTitle,
   fontSize,
+  nextButton,
 } from "./Styles";
 
 export default function Cards(props) {
-  const { BiayaIuran, Seragam, Sabuk } = props;
-  // console.log(props);
-  const classes = useStyles();
-  // State Checkbox Optional Cost
   const [seragam, setSeragam] = useState(false);
+  const [sabuk, setSabuk] = useState(false);
+  // Total
+  const [total, setTotal] = useState(0);
+  useEffect(() => {
+    const totalbiayaIuran = BiayaIuran.reduce(
+      (total, currentItem) => (total = total + currentItem.price),
+      0
+    );
+    setTotal(totalbiayaIuran);
+  }, []);
+
+  const { BiayaIuran, Seragam, Sabuk } = props;
+
+  const classes = useStyles();
+
   const handleChangeSeragam = () => {
     setSeragam(!seragam);
     const totalseragam = Seragam.reduce(
@@ -39,7 +51,6 @@ export default function Cards(props) {
       setTotal(totalseragam + total);
     }
   };
-  const [sabuk, setSabuk] = useState(false);
   const handleChangeSabuk = () => {
     setSabuk(!sabuk);
     const totalsabuk = Sabuk.reduce(
@@ -52,21 +63,18 @@ export default function Cards(props) {
       setTotal(totalsabuk + total);
     }
   };
-  // Total
-  const [total, setTotal] = useState(0);
-  useEffect(() => {
-    const totalbiayaIuran = BiayaIuran.reduce(
-      (total, currentItem) => (total = total + currentItem.price),
-      0
-    );
-    setTotal(totalbiayaIuran);
-  }, []);
 
-  const [valuecheckbox, setValuecheckbox] = useState("");
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(`\n ${valuecheckbox}`);
+  const getTotal = () => {
+    props.parentTotal({
+      cost: true,
+      BiayaIuran: BiayaIuran,
+      Seragam: Seragam,
+      Sabuk: Sabuk,
+      total: total,
+    });
+    console.log(BiayaIuran, Seragam, Sabuk, total);
   };
+
   return (
     <>
       <Card sx={cardStyles} maxHeight={210}>
@@ -153,14 +161,15 @@ export default function Cards(props) {
               </Grid>
             ))}
 
-          <Divider color={Colors.lightGray} />
+          <Divider className={classes.dividerColor} />
 
           {/* Total */}
           <Grid
             container
             direction={"row"}
             alignItems={"center"}
-            sx={{ color: Colors.seaGreen, mt: 1 }}
+            mt={1}
+            className={classes.total}
           >
             <Grid item xs={1.2}></Grid>
             <Grid item xs={6}>
@@ -182,42 +191,45 @@ export default function Cards(props) {
         </CardContent>
       </Card>
 
-      {/* Optional Cost Card*/}
-
+      {/* Checkbox Optional Cost*/}
       <Card sx={cardStyles} height={140}>
         <CardContent sx={cardContent}>
           <Typography sx={fontTitle}>Biaya Tambahan</Typography>
-          <form onSubmit={handleSubmit}>
-            {/* <button type="submit"></button> */}
-            <FormGroup onChange={(e) => setValuecheckbox(e.target.value)}>
-              {/* Checkbox Seragam */}
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    className={classes.checkbox}
-                    onChange={handleChangeSeragam}
-                  />
-                }
-                label="Seragam"
-                value="Seragam"
-                classes={{ label: classes.labelCheckbox }}
-              />
-              {/* Checkbox Sabuk */}
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    className={classes.checkbox}
-                    onChange={handleChangeSabuk}
-                  />
-                }
-                label="Sabuk"
-                value="Sabuk"
-                classes={{ label: classes.labelCheckbox }}
-              />
-            </FormGroup>
-          </form>
+          <FormGroup>
+            {/* Checkbox Seragam */}
+            <FormControlLabel
+              control={
+                <Checkbox
+                  className={classes.checkbox}
+                  onChange={handleChangeSeragam}
+                />
+              }
+              label="Seragam"
+              classes={{ label: classes.labelCheckbox }}
+            />
+            {/* Checkbox Sabuk */}
+            <FormControlLabel
+              control={
+                <Checkbox
+                  className={classes.checkbox}
+                  onChange={handleChangeSabuk}
+                />
+              }
+              label="Sabuk"
+              classes={{ label: classes.labelCheckbox }}
+            />
+          </FormGroup>
         </CardContent>
       </Card>
+
+      {/* Button */}
+      <Grid container mt={12}>
+        <Grid item xs={12}>
+          <Button onClick={getTotal} sx={nextButton}>
+            Lanjut
+          </Button>
+        </Grid>
+      </Grid>
     </>
   );
 }
