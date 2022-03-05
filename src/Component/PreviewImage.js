@@ -20,14 +20,7 @@ export default function PreviewImage() {
   };
 
   return (
-    <div
-    // style={{
-    //   display: "flex",
-    //   flexDirection: "column",
-    //   alignItems: "center",
-    //   justifyContent: "center",
-    // }}
-    >
+    <div>
       <input
         type="file"
         accept="image/*"
@@ -55,7 +48,7 @@ export default function PreviewImage() {
             objectFit: "cover",
           }}
         />
-      </div>{" "}
+      </div>
       {/* Button */}
       <AddCircleOutlineRoundedIcon
         onClick={() => imageUploader.current.click()}

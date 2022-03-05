@@ -23,7 +23,7 @@ import {
 
 export default function Cards(props) {
   const { BiayaIuran, Seragam, Sabuk } = props;
-  console.log(props);
+  // console.log(props);
   const classes = useStyles();
   // State Checkbox Optional Cost
   const [seragam, setSeragam] = useState(false);
@@ -62,6 +62,11 @@ export default function Cards(props) {
     setTotal(totalbiayaIuran);
   }, []);
 
+  const [valuecheckbox, setValuecheckbox] = useState("");
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(`\n ${valuecheckbox}`);
+  };
   return (
     <>
       <Card sx={cardStyles} maxHeight={210}>
@@ -178,34 +183,39 @@ export default function Cards(props) {
       </Card>
 
       {/* Optional Cost Card*/}
+
       <Card sx={cardStyles} height={140}>
         <CardContent sx={cardContent}>
           <Typography sx={fontTitle}>Biaya Tambahan</Typography>
-
-          <FormGroup>
-            {/* Checkbox Seragam */}
-            <FormControlLabel
-              control={
-                <Checkbox
-                  className={classes.checkbox}
-                  onChange={handleChangeSeragam}
-                />
-              }
-              label="Seragam"
-              classes={{ label: classes.labelCheckbox }}
-            />
-            {/* Checkbox Sabuk */}
-            <FormControlLabel
-              control={
-                <Checkbox
-                  className={classes.checkbox}
-                  onChange={handleChangeSabuk}
-                />
-              }
-              label="Sabuk"
-              classes={{ label: classes.labelCheckbox }}
-            />
-          </FormGroup>
+          <form onSubmit={handleSubmit}>
+            {/* <button type="submit"></button> */}
+            <FormGroup onChange={(e) => setValuecheckbox(e.target.value)}>
+              {/* Checkbox Seragam */}
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    className={classes.checkbox}
+                    onChange={handleChangeSeragam}
+                  />
+                }
+                label="Seragam"
+                value="Seragam"
+                classes={{ label: classes.labelCheckbox }}
+              />
+              {/* Checkbox Sabuk */}
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    className={classes.checkbox}
+                    onChange={handleChangeSabuk}
+                  />
+                }
+                label="Sabuk"
+                value="Sabuk"
+                classes={{ label: classes.labelCheckbox }}
+              />
+            </FormGroup>
+          </form>
         </CardContent>
       </Card>
     </>

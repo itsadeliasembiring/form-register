@@ -1,6 +1,6 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import { makeStyles } from "@mui/styles";
-import { styled } from "@mui/material/styles";
 import {
   Button,
   Box,
@@ -110,8 +110,11 @@ export default function StepperTesting() {
   const isStepSkipped = (step) => {
     return skipped.has(step);
   };
-
-  const handleNext = () => {
+  const onsubmit = (data) => {
+    console.log(data);
+  };
+  const handleNext = (data) => {
+    console.log(data);
     let newSkipped = skipped;
     if (isStepSkipped(activeStep)) {
       newSkipped = new Set(newSkipped.values());
@@ -120,6 +123,7 @@ export default function StepperTesting() {
 
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     setSkipped(newSkipped);
+    // setOnsubmit(true);
   };
 
   const handleBack = () => {
@@ -177,7 +181,7 @@ export default function StepperTesting() {
                 {activeStep === 0 ? (
                   <CostPages />
                 ) : activeStep === 1 ? (
-                  <FormPages />
+                  <FormPages dataForm={onsubmit} />
                 ) : (
                   <ScanPages />
                 )}
@@ -198,7 +202,7 @@ export default function StepperTesting() {
                       </Grid>
                       {/* SUBMIT BUTTON */}
                       <Grid item xs>
-                        <Button onClick={handleNext} sx={nextButton}>
+                        <Button onClick={onsubmit} sx={nextButton}>
                           Submit
                         </Button>
                       </Grid>

@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // Import Component MUI
 import {
   Button,
@@ -14,8 +14,6 @@ import {
   Typography,
   TextField,
 } from "@mui/material";
-// Import icon
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Profile from "../../Component/PreviewImage";
 import {
   useStyles,
@@ -26,7 +24,7 @@ import {
   profile,
 } from "./Styles";
 
-const Form = () => {
+const Form = (props) => {
   const classes = useStyles();
   // State Checkbox Optional Cost
   const [terdaftar, setTerdaftar] = useState(false);
@@ -42,68 +40,38 @@ const Form = () => {
   function handleUpload(event) {
     setFile(event.target.files[0]);
   }
-
+  // State Form
   const [nama, setNama] = useState("");
   const [jeniskelamin, setJeniskelamin] = useState("");
   const [tempatlahir, setTempatlahir] = useState("");
   const [tanggallahir, setTanggallahir] = useState("");
   const [alamat, setAlamat] = useState("");
   const [alasanmendaftar, setAlasanmendaftar] = useState("");
-  const [checkbox, setCheckbox] = useState("");
   const [perguruan, setPerguruan] = useState("");
   const [dojo, setDojo] = useState("");
   const [pelatih, setPelatih] = useState("");
   const [alasanpindah, setAlasanpindah] = useState("");
   const [ujianterakhir, setUjianterakhir] = useState("");
   const [tingkatan, setTingkatan] = useState("");
-  const [ijazah, setIjazah] = useState("");
   const [namaorangtua, setNamaorangtua] = useState("");
   const [teleponorangtua, setTeleponorangtua] = useState("");
   const [seragam, setSeragam] = useState("");
   const [ukuranseragam, setUkuranseragam] = useState("");
 
   const handleSubmit = (event) => {
+    props.dataForm = {
+      nama,
+      jeniskelamin,
+      tempatlahir,
+    };
     event.preventDefault();
-    console.log(
-      `\n`,
-      `Nama: ${nama}`,
-      `\n`,
-      `Jenis Kelamin: ${jeniskelamin}`,
-      `\n`,
-      `Tempat Lahir: ${tempatlahir}`,
-      `\n`,
-      `Tanggal Lahir: ${tanggallahir}`,
-      `\n`,
-      `Alamat: ${alamat}`,
-      `\n`,
-      `Alasan Mendaftar: ${alasanmendaftar}`,
-      `\n`,
-      `Apakah Anda: ${checkbox}`,
-      `\n`,
-      `Nama Perguruan: ${perguruan}`,
-      `\n`,
-      `Nama Dojo: ${dojo}`,
-      `\n`,
-      `Nama Pelatih: ${pelatih}`,
-      `\n`,
-      `Alasan Pindah: ${alasanpindah}`,
-      `\n`,
-      `Ujian Terakhir: ${ujianterakhir}`,
-      `\n`,
-      `Tingkatan Terakhir: ${tingkatan}`,
-      `\n`,
-      ijazah,
-      `\n`,
-      `Nama Orang Tua: ${namaorangtua}`,
-      `\n`,
-      `Nomor Telepon Orang Tua: ${teleponorangtua}`,
-      `\n`,
-      `Beli Seragam: ${seragam}`,
-      `\n`,
-      `Ukuran: ${ukuranseragam}`
-    );
   };
 
+  // useEffect(() => {
+  //   if (props.onClick) {
+  //     handleSubmit();
+  //   }
+  // }, []);
   return (
     <>
       <Grid container mt={1}>
@@ -131,37 +99,31 @@ const Form = () => {
                     height: 1,
                   },
                 }}
-                value={nama}
                 onChange={(e) => setNama(e.target.value)}
+                value={nama}
               ></TextField>
-              <Button type="submit">Submit</Button>
+              {/* <Button type="submit">Submit</Button> */}
             </Grid>
             {/* Gender */}
             <Grid item mt={1}>
               <FormControl className={classes.genderLabel} row={true}>
                 <FormLabel id="gender">Jenis Kelamin</FormLabel>
-                <RadioGroup row aria-labelledby="gender">
+                <RadioGroup
+                  row
+                  aria-labelledby="gender"
+                  onChange={(e) => setJeniskelamin(e.target.value)}
+                >
                   <FormControlLabel
                     className={classes.fontSizeLabel}
-                    control={
-                      <Radio
-                        className={classes.radioButton}
-                        onChange={(e) => setJeniskelamin(e.target.value)}
-                        value={jeniskelamin}
-                      />
-                    }
+                    control={<Radio className={classes.radioButton} />}
                     label="Laki-Laki"
+                    value="Laki-laki"
                   />
                   <FormControlLabel
                     className={classes.fontSizeLabel}
-                    control={
-                      <Radio
-                        className={classes.radioButton}
-                        onChange={(e) => setJeniskelamin(e.target.value)}
-                        value={jeniskelamin}
-                      />
-                    }
+                    control={<Radio className={classes.radioButton} />}
                     label="Perempuan"
+                    value="Perempuan"
                   />
                 </RadioGroup>
               </FormControl>
@@ -190,6 +152,7 @@ const Form = () => {
             <input
               type="date"
               className="calendar"
+              placeholder="dd-mm-yyyy"
               style={calendar}
               onChange={(e) => setTanggallahir(e.target.value)}
               value={tanggallahir}
@@ -252,11 +215,7 @@ const Form = () => {
                 control={
                   <Checkbox
                     className={classes.checkbox}
-                    onChange={
-                      (handleChangeTerdaftar,
-                      (e) => setCheckbox(e.target.value))
-                    }
-                    value={checkbox}
+                    onChange={handleChangeTerdaftar}
                   />
                 }
                 label="Telah terdaftar dojo sebelumnya"
@@ -266,10 +225,7 @@ const Form = () => {
                 control={
                   <Checkbox
                     className={classes.checkbox}
-                    onChange={
-                      (handleChangeOrangtua, (e) => setCheckbox(e.target.value))
-                    }
-                    value={checkbox}
+                    onChange={handleChangeOrangtua}
                   />
                 }
                 label="Orang tua peserta"
@@ -444,30 +400,20 @@ const Form = () => {
               <FormLabel id="beliseragam">Beli Seragam</FormLabel>
               <RadioGroup
                 aria-labelledby="beliseragam"
-                defaultValue="ya"
                 name="radio-buttons-group"
                 className={classes.radioButton}
+                onChange={(e) => setSeragam(e.target.value)}
               >
                 <FormControlLabel
                   className={classes.fontSizeLabel}
-                  value="ya"
-                  control={
-                    <Radio
-                      onChange={(e) => setSeragam(e.target.value)}
-                      value={seragam}
-                    />
-                  }
+                  value="Ya"
+                  control={<Radio />}
                   label="Ya"
                 />
                 <FormControlLabel
                   className={classes.fontSizeLabel}
-                  value="tidak"
-                  control={
-                    <Radio
-                      onChange={(e) => setSeragam(e.target.value)}
-                      value={seragam}
-                    />
-                  }
+                  value="Tidak"
+                  control={<Radio />}
                   label="Tidak"
                 />
               </RadioGroup>
@@ -479,63 +425,38 @@ const Form = () => {
               <FormLabel id="size">Ukuran</FormLabel>
               <RadioGroup
                 aria-labelledby="size"
-                defaultValue="M"
                 name="ukuranseragam"
                 className={classes.radioButton}
+                onChange={(e) => setUkuranseragam(e.target.value)}
               >
                 <FormControlLabel
                   className={classes.fontSizeLabel}
                   value="S"
-                  control={
-                    <Radio
-                      onChange={(e) => setUkuranseragam(e.target.value)}
-                      value={ukuranseragam}
-                    />
-                  }
+                  control={<Radio />}
                   label="S"
                 />
                 <FormControlLabel
                   className={classes.fontSizeLabel}
                   value="M"
-                  control={
-                    <Radio
-                      onChange={(e) => setUkuranseragam(e.target.value)}
-                      value={ukuranseragam}
-                    />
-                  }
+                  control={<Radio />}
                   label="M"
                 />
                 <FormControlLabel
                   className={classes.fontSizeLabel}
                   value="L"
-                  control={
-                    <Radio
-                      onChange={(e) => setUkuranseragam(e.target.value)}
-                      value={ukuranseragam}
-                    />
-                  }
+                  control={<Radio />}
                   label="L"
                 />
                 <FormControlLabel
                   className={classes.fontSizeLabel}
                   value="XL"
-                  control={
-                    <Radio
-                      onChange={(e) => setUkuranseragam(e.target.value)}
-                      value={ukuranseragam}
-                    />
-                  }
+                  control={<Radio />}
                   label="XL"
                 />
                 <FormControlLabel
                   className={classes.fontSizeLabel}
                   value="XXL"
-                  control={
-                    <Radio
-                      onChange={(e) => setUkuranseragam(e.target.value)}
-                      value={ukuranseragam}
-                    />
-                  }
+                  control={<Radio />}
                   label="XXL"
                 />
               </RadioGroup>
