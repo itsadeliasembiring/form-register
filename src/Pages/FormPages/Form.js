@@ -13,8 +13,11 @@ import {
   RadioGroup,
   Typography,
   TextField,
+  Stack,
 } from "@mui/material";
-import Profile from "../../Component/PreviewImage";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
 import {
   useStyles,
   fontTitle,
@@ -24,6 +27,7 @@ import {
   backButton,
   nextButton,
 } from "./Styles";
+import Profile from "../../Component/PreviewImage";
 
 const Form = (props) => {
   const classes = useStyles();
@@ -87,6 +91,9 @@ const Form = (props) => {
   const handleCancel = () => {
     props.parentCancel();
   };
+  const handleDate = (newValue) => {
+    setTanggallahir(newValue);
+  };
 
   return (
     <>
@@ -118,7 +125,6 @@ const Form = (props) => {
                 onChange={(e) => setNama(e.target.value)}
                 value={nama}
               ></TextField>
-              {/* <Button type="submit">Submit</Button> */}
             </Grid>
             {/* Gender */}
             <Grid item mt={1}>
@@ -165,14 +171,20 @@ const Form = (props) => {
           </Grid>
           {/* Birthdate */}
           <Grid item justifyContent={"center"} xs={6}>
-            <input
-              type="date"
-              className="calendar"
-              placeholder="dd-mm-yyyy"
-              style={calendar}
-              onChange={(e) => setTanggallahir(e.target.value)}
-              value={tanggallahir}
-            />
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <Stack spacing={7}>
+                <DesktopDatePicker
+                  placeholder="Date desktop"
+                  inputFormat="dd/MM/yyyy"
+                  value={tanggallahir}
+                  onChange={handleDate}
+                  renderInput={(params) => (
+                    <TextField {...params} className={classes.calendar} />
+                  )}
+                  className={classes.datePicker}
+                />
+              </Stack>
+            </LocalizationProvider>
           </Grid>
         </Grid>
 

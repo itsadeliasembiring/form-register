@@ -56,6 +56,35 @@ export const useStyles = makeStyles(() => ({
       borderColor: Colors.lightGray,
     },
   },
+  calendar: {
+    width: "100%",
+    "& .MuiInputBase-root": {
+      fontSize: 12,
+      height: 34.5,
+    },
+    "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+      border: "1.5px solid",
+      borderColor: Colors.lightGray,
+      borderRadius: 7,
+    },
+    "&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+      borderColor: Colors.lightGray,
+    },
+    "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+      borderColor: Colors.lightGray,
+    },
+    "& .MuiOutlinedInput-root.Mui-error .MuiOutlinedInput-notchedOutline": {
+      borderColor: Colors.lightGray,
+    },
+    "& svg": {
+      color: Colors.seaGreen,
+    },
+  },
+  datePicker: {
+    "& .MuiInputBase-root": {
+      height: 1.4,
+    },
+  },
 }));
 
 export const fontTitle = {
@@ -71,21 +100,24 @@ export const fontSubTitle = {
 };
 
 export const calendar = {
-  color: Colors.seaGreen,
-  width: "94%",
-  height: 30,
-  borderRadius: 7,
-  border: "1.5px solid #d3d3d3",
-  borderColor: Colors.lightGray,
-  "& svg": {
-    color: Colors.seaGreen,
+  width: "100%",
+  "& .MuiInputBase-root .MuiOutlinedInput-root": {
+    border: "1.5px solid",
+    borderColor: Colors.lightGray,
+    borderRadius: 7,
+  },
+  "&:hover .MuiInputBase-root .MuiOutlinedInput-root": {
+    borderColor: Colors.lightGray,
+  },
+  "& .MuiInputBase-root.Mui-focused .MuiOutlinedInput-root": {
+    borderColor: Colors.lightGray,
   },
 };
 
 export const backButton = {
   color: Colors.white,
   backgroundColor: Colors.seaGreen,
-  "&:focus": {
+  "&:hover": {
     backgroundColor: Colors.seaGreen,
   },
   width: "100%",
