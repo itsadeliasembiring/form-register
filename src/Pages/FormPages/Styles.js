@@ -56,7 +56,7 @@ export const useStyles = makeStyles(() => ({
       borderColor: Colors.lightGray,
     },
   },
-  calendar: {
+  textFieldCalendar: {
     width: "100%",
     "& .MuiInputBase-root": {
       fontSize: 12,
@@ -84,6 +84,9 @@ export const useStyles = makeStyles(() => ({
     "& .MuiInputBase-root": {
       height: 1.4,
     },
+    "& .MuiButtonBase-root .MuiPickersDay-root .Mui-selected": {
+      backgroundColor: Colors.seaGreen,
+    },
   },
 }));
 
@@ -99,21 +102,7 @@ export const fontSubTitle = {
   align: "left",
 };
 
-export const calendar = {
-  width: "100%",
-  "& .MuiInputBase-root .MuiOutlinedInput-root": {
-    border: "1.5px solid",
-    borderColor: Colors.lightGray,
-    borderRadius: 7,
-  },
-  "&:hover .MuiInputBase-root .MuiOutlinedInput-root": {
-    borderColor: Colors.lightGray,
-  },
-  "& .MuiInputBase-root.Mui-focused .MuiOutlinedInput-root": {
-    borderColor: Colors.lightGray,
-  },
-};
-
+// Button Styles
 export const backButton = {
   color: Colors.white,
   backgroundColor: Colors.seaGreen,
@@ -126,7 +115,6 @@ export const backButton = {
   textTransform: "capitalize",
   textDecoration: "none",
 };
-
 export const nextButton = {
   color: Colors.white,
   backgroundColor: Colors.orange,
@@ -139,7 +127,6 @@ export const nextButton = {
   textTransform: "capitalize",
   textDecoration: "none",
 };
-
 export const uploadButton = {
   color: Colors.white,
   backgroundColor: Colors.orange,
@@ -151,4 +138,28 @@ export const uploadButton = {
   fontSize: 12,
   textTransform: "capitalize",
   boxShadow: "none",
+};
+
+// Profile Image Styles
+export const divProfile = {
+  height: 78,
+  width: 78,
+  borderRadius: "100%",
+  backgroundColor: Colors.lightGray,
+  marginBottom: -10,
+};
+export const imgProfile = {
+  width: "100%",
+  height: "100%",
+  borderRadius: "100%",
+  objectFit: "cover",
+};
+export const uploadProfile = {
+  width: 20,
+  height: 20,
+  color: Colors.seaGreen,
+  ml: 6,
+  mt: -5,
+  backgroundColor: Colors.white,
+  borderRadius: "100%",
 };

@@ -7,7 +7,7 @@ import ArrowBackTwoToneIcon from "@mui/icons-material/ArrowBackTwoTone";
 import { appBar, box, iconButton, iconSize, fontTitle } from "./Styles";
 
 export default function Navbar(props) {
-  // BackButton
+  // Back IconButton
   const handleBack = () => {
     props.parentBack();
   };

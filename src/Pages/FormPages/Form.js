@@ -18,20 +18,27 @@ import {
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
+// Import Styles
 import {
   useStyles,
+  divProfile,
   fontTitle,
-  calendar,
   fontSubTitle,
+  imgProfile,
   uploadButton,
   backButton,
   nextButton,
+  uploadProfile,
 } from "./Styles";
-import Profile from "../../Component/PreviewImage";
+import AddCircleOutlineRoundedIcon from "@mui/icons-material/AddCircleOutlineRounded";
 
 const Form = (props) => {
   const classes = useStyles();
+  const uploadedImage = React.useRef(null);
+  const imageUploader = React.useRef(null);
+
   // State Form
+  const [profileImage, setProfileImage] = React.useState(null);
   const [terdaftar, setTerdaftar] = useState(false);
   const [orangtua, setOrangtua] = useState(false);
   const [file, setFile] = useState("");
@@ -52,6 +59,27 @@ const Form = (props) => {
   const [seragam, setSeragam] = useState("");
   const [ukuranseragam, setUkuranseragam] = useState("");
 
+  // Filename Ijazah
+  const filename = file.name;
+
+  // Upload Ijazah
+  function handleUpload(event) {
+    setFile(event.target.files[0]);
+  }
+  // Upload Image
+  const handleImageUpload = (e) => {
+    const [file] = e.target.files;
+    if (file) {
+      setProfileImage(file.name);
+      const reader = new FileReader();
+      const { current } = uploadedImage;
+      current.file = file;
+      reader.onload = (e) => {
+        current.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  };
   // Checkbox Optional Cost
   const handleChangeTerdaftar = () => {
     setTerdaftar(!terdaftar);
@@ -59,14 +87,10 @@ const Form = (props) => {
   const handleChangeOrangtua = () => {
     setOrangtua(!orangtua);
   };
-  const filename = file.name;
-  // Upload Ijazah
-  function handleUpload(event) {
-    setFile(event.target.files[0]);
-  }
   // Submit Button
   const handleSubmit = (event) => {
     const dataSend = {
+      profileImage,
       nama,
       jeniskelamin,
       tempatlahir,
@@ -104,11 +128,28 @@ const Form = (props) => {
           </Typography>
         </Grid>
       </Grid>
+
       <form onSubmit={handleSubmit}>
         <Grid container direction={"row"} spacing={2}>
-          {/* Profil */}
+          {/* Profile Image */}
           <Grid item xs={3.5}>
-            <Profile />
+            <div>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageUpload}
+                ref={imageUploader}
+                style={{ display: "none" }}
+              />
+              <div style={divProfile}>
+                <img ref={uploadedImage} style={imgProfile} />
+              </div>
+              {/* Button */}
+              <AddCircleOutlineRoundedIcon
+                onClick={() => imageUploader.current.click()}
+                sx={uploadProfile}
+              />
+            </div>
           </Grid>
           <Grid item xs>
             {/* Name */}
@@ -179,7 +220,10 @@ const Form = (props) => {
                   value={tanggallahir}
                   onChange={handleDate}
                   renderInput={(params) => (
-                    <TextField {...params} className={classes.calendar} />
+                    <TextField
+                      {...params}
+                      className={classes.textFieldCalendar}
+                    />
                   )}
                   className={classes.datePicker}
                 />
@@ -262,7 +306,8 @@ const Form = (props) => {
             </FormGroup>
           </Grid>
         </Grid>
-        {/* Terdaftar */}
+
+        {/* Form Registered */}
         {terdaftar && (
           <Grid container spacing={1.3}>
             <Grid item xs={12}>
@@ -279,7 +324,6 @@ const Form = (props) => {
                 value={perguruan}
               ></TextField>
             </Grid>
-
             <Grid item xs={12}>
               <TextField
                 placeholder="Nama Dojo"
@@ -370,7 +414,7 @@ const Form = (props) => {
                 </Button>
               </label>
             </Grid>
-            {/* FileName */}
+            {/* File Name */}
             <Grid item xs={12} Align={"right"} mt={-1}>
               <Typography fontSize={13} fontWeight={"bold"}>
                 {file.name}
@@ -378,13 +422,14 @@ const Form = (props) => {
             </Grid>
           </Grid>
         )}
-        {/* Orangtua */}
+
+        {/* Form Parent*/}
         {orangtua && (
           <Grid container spacing={1.3} mt={0.1} alignItems="center">
             <Grid item xs={12}>
               <Typography sx={fontTitle}>Informasi Orang Tua</Typography>
             </Grid>
-            {/* Nama Orang Tua */}
+            {/* Parent Name */}
             <Grid item xs={12}>
               <TextField
                 placeholder="Nama Orang Tua"
@@ -399,7 +444,7 @@ const Form = (props) => {
                 value={namaorangtua}
               ></TextField>
             </Grid>
-            {/* Nomor Telepon Orang Tua */}
+            {/* Parent Phone Number */}
             <Grid item xs={12}>
               <TextField
                 placeholder="Nomor Telepon Orang Tua"
@@ -422,13 +467,12 @@ const Form = (props) => {
           <Grid item xs={12}>
             <Typography sx={fontTitle}>Seragam</Typography>
           </Grid>
-          {/* Pilihan beli seragam */}
+          {/* To choose buy or not */}
           <Grid item xs={12}>
             <FormControl className={classes.seragamLabel}>
               <FormLabel id="beliseragam">Beli Seragam</FormLabel>
               <RadioGroup
-                aria-labelledby="beliseragam"
-                name="radio-buttons-group"
+                name="beliseragam"
                 className={classes.radioButton}
                 onChange={(e) => setSeragam(e.target.value)}
               >
@@ -447,12 +491,11 @@ const Form = (props) => {
               </RadioGroup>
             </FormControl>
           </Grid>
-          {/* Ukuran Seragam */}
+          {/* Choose size */}
           <Grid item xs={12}>
             <FormControl className={classes.seragamLabel}>
               <FormLabel id="size">Ukuran</FormLabel>
               <RadioGroup
-                aria-labelledby="size"
                 name="ukuranseragam"
                 className={classes.radioButton}
                 onChange={(e) => setUkuranseragam(e.target.value)}
@@ -497,14 +540,17 @@ const Form = (props) => {
           container
           spacing={1}
           mt={5}
+          mb={3}
           alignItems="center"
           direction={"row"}
         >
+          {/* Back Button */}
           <Grid item xs={6}>
             <Button onClick={handleCancel} sx={backButton}>
               Kembali
             </Button>
           </Grid>
+          {/* Submit Button */}
           <Grid item xs>
             <Button onClick={handleSubmit} sx={nextButton}>
               Submit

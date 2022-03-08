@@ -41,30 +41,8 @@ export const useStyles = makeStyles(() => ({
   },
 }));
 
-export const backButton = {
-  color: Colors.white,
-  backgroundColor: Colors.seaGreen,
-  "&:hover": {
-    backgroundColor: Colors.seaGreen,
-  },
+export const stepper = {
   width: "100%",
-  height: 40,
-  fontSize: 14,
-  textTransform: "capitalize",
-  textDecoration: "none",
-  bottom: 0,
-};
-
-export const nextButton = {
-  color: Colors.white,
-  backgroundColor: Colors.orange,
-  "&:hover": {
-    backgroundColor: Colors.orange,
-  },
-  width: "100%",
-  height: 40,
-  fontSize: 14,
-  textTransform: "capitalize",
-  textDecoration: "none",
-  bottom: 0,
+  mt: 9,
+  pl: 0.5,
 };

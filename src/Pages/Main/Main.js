@@ -1,25 +1,23 @@
 import React from "react";
 import { useState } from "react";
 import {
-  Button,
   Box,
   Container,
   Stepper,
   Step,
   StepLabel,
-  Grid,
   StepConnector,
 } from "@mui/material";
-// Import component
+// Import Component
 import Card from "../../Component/CostCard/Card";
 import FormPages from "../FormPages/Form";
+import Navbar from "../../Component/Navbar/Navbar";
 import ScanPages from "../ScanPages/Scan";
 import SubmittedPages from "../SubmittedPages/Submitted";
-import Navbar from "../../Component/Navbar/Navbar";
 // Import Data
 import { BiayaIuran, Seragam, Sabuk } from "../../Component/CostCard/Data";
 // Import Styles
-import { useStyles, backButton, nextButton } from "./Styles";
+import { useStyles, stepper } from "./Styles";
 
 // Label Step
 function getSteps() {
@@ -33,12 +31,14 @@ export default function StepperTesting() {
   const [datatotal, setDatatotal] = useState();
 
   const steps = getSteps();
-  const isStepFinish = (step) => {
-    return step === 2;
-  };
+
   const isStepSkipped = (step) => {
     return skipped.has(step);
   };
+  const isStepFinish = (step) => {
+    return step === 2;
+  };
+
   const handleNext = (data) => {
     console.log(data);
     let newSkipped = skipped;
@@ -59,6 +59,17 @@ export default function StepperTesting() {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
+  const handleFinish = () => {
+    isStepFinish(activeStep);
+    let newSkipped = skipped;
+    if (isStepSkipped(activeStep)) {
+      newSkipped = new Set(newSkipped.values());
+      newSkipped.delete(activeStep);
+    }
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    setSkipped(newSkipped);
+  };
+
   const handleReset = () => {
     setActiveStep(0);
   };
@@ -66,12 +77,13 @@ export default function StepperTesting() {
   return (
     <>
       <Navbar parentBack={handleBack}>Pendaftaran</Navbar>
+
       <Container>
         {/* Stepper */}
         <Stepper
           activeStep={activeStep}
-          sx={{ width: "100%", mt: 9 }}
           connector={<StepConnector className={classes.connectorLine} />}
+          sx={stepper}
         >
           {steps.map((label, index) => {
             const stepProps = {};
@@ -86,26 +98,20 @@ export default function StepperTesting() {
             );
           })}
         </Stepper>
+      </Container>
 
+      <Container>
         {/* Content */}
         <Box>
-          <div>
+          <>
             {activeStep === steps.length ? (
               // Submitted Pages
-              <div>
-                <SubmittedPages />
-                {/* Homepage Button */}
-                <Grid container spacing={1} mt={25} mb={3} alignItems="center">
-                  <Grid item xs={12}>
-                    <Button onClick={handleReset} sx={backButton}>
-                      Kembali ke Beranda
-                    </Button>
-                  </Grid>
-                </Grid>
-              </div>
+              <>
+                <SubmittedPages parentReset={handleReset} />
+              </>
             ) : (
               // Switch Pages
-              <div>
+              <>
                 {activeStep === 0 ? (
                   <Card
                     BiayaIuran={BiayaIuran}
@@ -119,22 +125,11 @@ export default function StepperTesting() {
                     parentCancel={handleBack}
                   />
                 ) : (
-                  <ScanPages />
+                  <ScanPages parentFinish={handleFinish} />
                 )}
-                <div>
-                  <Grid container spacing={1} mt={5} mb={3} alignItems="center">
-                    {isStepFinish(activeStep) && (
-                      <Grid item xs={12}>
-                        <Button onClick={handleNext} sx={nextButton}>
-                          Finish
-                        </Button>
-                      </Grid>
-                    )}
-                  </Grid>
-                </div>
-              </div>
+              </>
             )}
-          </div>
+          </>
         </Box>
       </Container>
     </>

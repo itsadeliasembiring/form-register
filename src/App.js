@@ -1,10 +1,10 @@
 import React from "react";
-import FormRegister from "./Pages/FormRegister/FormRegister";
+import Main from "./Pages/Main/Main";
 
 function App() {
   return (
     <div className="App">
-      <FormRegister />
+      <Main />
     </div>
   );
 }

@@ -11,12 +11,17 @@ export const useStyles = makeStyles(() => ({
   dividerColor: {
     backgroundColor: Colors.lightGray,
   },
-  labelCheckbox: {
-    fontSize: "15px",
+  grid: {
+    direction: "row",
+    alignItems: "center",
+    marginBottom: 1,
   },
   iconSize: {
     width: 24,
     height: 24,
+  },
+  labelCheckbox: {
+    fontSize: "15px",
   },
   grid: {
     direction: "row",

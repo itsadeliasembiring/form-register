@@ -7,26 +7,28 @@ import {
   CardContent,
   Checkbox,
   Divider,
-  FormGroup,
   FormControlLabel,
+  FormGroup,
   Grid,
   Typography,
 } from "@mui/material";
 // Import Styles
 import {
-  useStyles,
   cardStyles,
   cardContent,
   fontTitle,
   fontSize,
   nextButton,
+  useStyles,
 } from "./Styles";
 
 export default function Cards(props) {
+  const classes = useStyles();
+  const { BiayaIuran, Seragam, Sabuk } = props;
   const [seragam, setSeragam] = useState(false);
   const [sabuk, setSabuk] = useState(false);
-  // Total
   const [total, setTotal] = useState(0);
+
   useEffect(() => {
     const totalbiayaIuran = BiayaIuran.reduce(
       (total, currentItem) => (total = total + currentItem.price),
@@ -34,10 +36,6 @@ export default function Cards(props) {
     );
     setTotal(totalbiayaIuran);
   }, []);
-
-  const { BiayaIuran, Seragam, Sabuk } = props;
-
-  const classes = useStyles();
 
   const handleChangeSeragam = () => {
     setSeragam(!seragam);
@@ -83,7 +81,7 @@ export default function Cards(props) {
             Informasi Biaya
           </Typography>
 
-          {/* Mandatory Cost  */}
+          {/* Mandatory Cost */}
           {BiayaIuran.map((biayaIuran) => (
             <Grid container className={classes.grid}>
               {/* Icon */}
@@ -223,7 +221,7 @@ export default function Cards(props) {
       </Card>
 
       {/* Button */}
-      <Grid container mt={12}>
+      <Grid container mt={14} mb={3}>
         <Grid item xs={12}>
           <Button onClick={getTotal} sx={nextButton}>
             Lanjut
