@@ -31,7 +31,7 @@ const Submitted = (props) => {
       </Grid>
 
       {/* Back To Homepage Button */}
-      <Grid container spacing={1} mt={25} mb={3} alignItems="center">
+      <Grid container spacing={1} mt={40} mb={3} alignItems="center">
         <Grid item xs={12}>
           <Button onClick={handleReset} sx={homepageButton}>
             Kembali ke Beranda

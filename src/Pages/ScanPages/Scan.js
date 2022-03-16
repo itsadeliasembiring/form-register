@@ -23,7 +23,6 @@ const Scan = (props) => {
         textAlign="center"
         justifyContent="center"
         alignItems="center"
-        mb={15}
       >
         <Grid item xs={12}>
           <QrCode2Icon sx={icon} />
@@ -36,7 +35,7 @@ const Scan = (props) => {
       </Grid>
 
       {/* Finish button */}
-      <Grid container spacing={1} mb={3} alignItems="center">
+      <Grid container spacing={1} mt={35} mb={3} alignItems="center">
         <Grid item xs={12}>
           <Button onClick={handleFinish} sx={finishButton}>
             Finish

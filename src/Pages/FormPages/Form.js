@@ -11,26 +11,28 @@ import {
   FormLabel,
   Radio,
   RadioGroup,
-  Typography,
   TextField,
+  Typography,
   Stack,
 } from "@mui/material";
+// Import Date
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
+// Import Icon
+import AddCircleOutlineRoundedIcon from "@mui/icons-material/AddCircleOutlineRounded";
 // Import Styles
 import {
-  useStyles,
-  divProfile,
   fontTitle,
   fontSubTitle,
+  divProfile,
   imgProfile,
+  uploadProfile,
   uploadButton,
   backButton,
   nextButton,
-  uploadProfile,
+  useStyles,
 } from "./Styles";
-import AddCircleOutlineRoundedIcon from "@mui/icons-material/AddCircleOutlineRounded";
 
 const Form = (props) => {
   const classes = useStyles();
@@ -58,7 +60,7 @@ const Form = (props) => {
   const [teleponorangtua, setTeleponorangtua] = useState("");
   const [seragam, setSeragam] = useState("");
   const [ukuranseragam, setUkuranseragam] = useState("");
-
+  const [beliseragam, setBeliSeragam] = useState(true);
   // Filename Ijazah
   const filename = file.name;
 
@@ -80,13 +82,17 @@ const Form = (props) => {
       reader.readAsDataURL(file);
     }
   };
-  // Checkbox Optional Cost
+  // Checkbox
   const handleChangeTerdaftar = () => {
     setTerdaftar(!terdaftar);
   };
   const handleChangeOrangtua = () => {
     setOrangtua(!orangtua);
   };
+  const handleChangeBeliSeragam = () => {
+    setBeliSeragam(!beliseragam);
+  };
+
   // Submit Button
   const handleSubmit = (event) => {
     const dataSend = {
@@ -115,6 +121,7 @@ const Form = (props) => {
   const handleCancel = () => {
     props.parentCancel();
   };
+  // Date
   const handleDate = (newValue) => {
     setTanggallahir(newValue);
   };
@@ -144,7 +151,7 @@ const Form = (props) => {
               <div style={divProfile}>
                 <img ref={uploadedImage} style={imgProfile} />
               </div>
-              {/* Button */}
+              {/* Upload Profile Image */}
               <AddCircleOutlineRoundedIcon
                 onClick={() => imageUploader.current.click()}
                 sx={uploadProfile}
@@ -471,68 +478,69 @@ const Form = (props) => {
           <Grid item xs={12}>
             <FormControl className={classes.seragamLabel}>
               <FormLabel id="beliseragam">Beli Seragam</FormLabel>
-              <RadioGroup
-                name="beliseragam"
-                className={classes.radioButton}
-                onChange={(e) => setSeragam(e.target.value)}
-              >
+              <RadioGroup name="beliseragam" className={classes.radioButton}>
                 <FormControlLabel
                   className={classes.fontSizeLabel}
                   value="Ya"
                   control={<Radio />}
                   label="Ya"
+                  // onChange={handleChangeBeliSeragam}
+                  onChange={handleChangeBeliSeragam}
                 />
                 <FormControlLabel
                   className={classes.fontSizeLabel}
                   value="Tidak"
                   control={<Radio />}
                   label="Tidak"
+                  onChange={handleChangeBeliSeragam}
                 />
               </RadioGroup>
             </FormControl>
           </Grid>
           {/* Choose size */}
-          <Grid item xs={12}>
-            <FormControl className={classes.seragamLabel}>
-              <FormLabel id="size">Ukuran</FormLabel>
-              <RadioGroup
-                name="ukuranseragam"
-                className={classes.radioButton}
-                onChange={(e) => setUkuranseragam(e.target.value)}
-              >
-                <FormControlLabel
-                  className={classes.fontSizeLabel}
-                  value="S"
-                  control={<Radio />}
-                  label="S"
-                />
-                <FormControlLabel
-                  className={classes.fontSizeLabel}
-                  value="M"
-                  control={<Radio />}
-                  label="M"
-                />
-                <FormControlLabel
-                  className={classes.fontSizeLabel}
-                  value="L"
-                  control={<Radio />}
-                  label="L"
-                />
-                <FormControlLabel
-                  className={classes.fontSizeLabel}
-                  value="XL"
-                  control={<Radio />}
-                  label="XL"
-                />
-                <FormControlLabel
-                  className={classes.fontSizeLabel}
-                  value="XXL"
-                  control={<Radio />}
-                  label="XXL"
-                />
-              </RadioGroup>
-            </FormControl>
-          </Grid>
+          {!beliseragam && (
+            <Grid item xs={12}>
+              <FormControl className={classes.seragamLabel}>
+                <FormLabel id="size">Ukuran</FormLabel>
+                <RadioGroup
+                  name="ukuranseragam"
+                  className={classes.radioButton}
+                  onChange={(e) => setUkuranseragam(e.target.value)}
+                >
+                  <FormControlLabel
+                    className={classes.fontSizeLabel}
+                    value="S"
+                    control={<Radio />}
+                    label="S"
+                  />
+                  <FormControlLabel
+                    className={classes.fontSizeLabel}
+                    value="M"
+                    control={<Radio />}
+                    label="M"
+                  />
+                  <FormControlLabel
+                    className={classes.fontSizeLabel}
+                    value="L"
+                    control={<Radio />}
+                    label="L"
+                  />
+                  <FormControlLabel
+                    className={classes.fontSizeLabel}
+                    value="XL"
+                    control={<Radio />}
+                    label="XL"
+                  />
+                  <FormControlLabel
+                    className={classes.fontSizeLabel}
+                    value="XXL"
+                    control={<Radio />}
+                    label="XXL"
+                  />
+                </RadioGroup>
+              </FormControl>
+            </Grid>
+          )}
         </Grid>
 
         {/* Button */}

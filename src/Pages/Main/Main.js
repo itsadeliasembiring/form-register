@@ -113,6 +113,7 @@ export default function StepperTesting() {
               // Switch Pages
               <>
                 {activeStep === 0 ? (
+                  // Card Pages
                   <Card
                     BiayaIuran={BiayaIuran}
                     Seragam={Seragam}
@@ -120,11 +121,13 @@ export default function StepperTesting() {
                     parentTotal={handleNext}
                   />
                 ) : activeStep === 1 ? (
+                  // Form Pages
                   <FormPages
                     parentCallback={handleNext}
                     parentCancel={handleBack}
                   />
                 ) : (
+                  // Scan Pages
                   <ScanPages parentFinish={handleFinish} />
                 )}
               </>

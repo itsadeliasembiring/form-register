@@ -220,7 +220,7 @@ export default function Cards(props) {
         </CardContent>
       </Card>
 
-      {/* Button */}
+      {/* Next Button */}
       <Grid container mt={14} mb={3}>
         <Grid item xs={12}>
           <Button onClick={getTotal} sx={nextButton}>

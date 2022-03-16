@@ -8,6 +8,9 @@ export const useStyles = makeStyles(() => ({
       color: Colors.seaGreen,
     },
   },
+  labelCheckbox: {
+    fontSize: "15px",
+  },
   dividerColor: {
     backgroundColor: Colors.lightGray,
   },
@@ -19,14 +22,6 @@ export const useStyles = makeStyles(() => ({
   iconSize: {
     width: 24,
     height: 24,
-  },
-  labelCheckbox: {
-    fontSize: "15px",
-  },
-  grid: {
-    direction: "row",
-    alignItems: "center",
-    marginBottom: 1,
   },
   total: { color: Colors.seaGreen },
 }));
