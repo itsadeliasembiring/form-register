@@ -41,29 +41,29 @@ const Form = (props) => {
 
   // State Form
   const [profileImage, setProfileImage] = React.useState(null);
-  const [terdaftar, setTerdaftar] = useState(false);
-  const [orangtua, setOrangtua] = useState(false);
-  const [file, setFile] = useState("");
   const [nama, setNama] = useState("");
   const [jeniskelamin, setJeniskelamin] = useState("");
   const [tempatlahir, setTempatlahir] = useState("");
   const [tanggallahir, setTanggallahir] = useState("");
   const [alamat, setAlamat] = useState("");
   const [alasanmendaftar, setAlasanmendaftar] = useState("");
+  const [terdaftar, setTerdaftar] = useState(false);
   const [perguruan, setPerguruan] = useState("");
   const [dojo, setDojo] = useState("");
   const [pelatih, setPelatih] = useState("");
   const [alasanpindah, setAlasanpindah] = useState("");
   const [ujianterakhir, setUjianterakhir] = useState("");
   const [tingkatan, setTingkatan] = useState("");
+  const [file, setFile] = useState("");
+  const [orangtua, setOrangtua] = useState(false);
   const [namaorangtua, setNamaorangtua] = useState("");
   const [teleponorangtua, setTeleponorangtua] = useState("");
-  const [seragam, setSeragam] = useState("");
+  const [seragam, setSeragam] = useState(true);
+  const [beliseragam, setBeliSeragam] = useState("");
   const [ukuranseragam, setUkuranseragam] = useState("");
-  const [beliseragam, setBeliSeragam] = useState(true);
+
   // Filename Ijazah
   const filename = file.name;
-
   // Upload Ijazah
   function handleUpload(event) {
     setFile(event.target.files[0]);
@@ -89,8 +89,8 @@ const Form = (props) => {
   const handleChangeOrangtua = () => {
     setOrangtua(!orangtua);
   };
-  const handleChangeBeliSeragam = () => {
-    setBeliSeragam(!beliseragam);
+  const handleChangeSeragam = () => {
+    setSeragam(!seragam);
   };
 
   // Submit Button
@@ -111,7 +111,7 @@ const Form = (props) => {
       filename,
       namaorangtua,
       teleponorangtua,
-      seragam,
+      beliseragam,
       ukuranseragam,
     };
     props.parentCallback(dataSend);
@@ -151,7 +151,7 @@ const Form = (props) => {
               <div style={divProfile}>
                 <img ref={uploadedImage} style={imgProfile} />
               </div>
-              {/* Upload Profile Image */}
+              {/* Button Upload Profile Image */}
               <AddCircleOutlineRoundedIcon
                 onClick={() => imageUploader.current.click()}
                 sx={uploadProfile}
@@ -232,7 +232,6 @@ const Form = (props) => {
                       className={classes.textFieldCalendar}
                     />
                   )}
-                  className={classes.datePicker}
                 />
               </Stack>
             </LocalizationProvider>
@@ -314,7 +313,7 @@ const Form = (props) => {
           </Grid>
         </Grid>
 
-        {/* Form Registered */}
+        {/* Registered */}
         {terdaftar && (
           <Grid container spacing={1.3}>
             <Grid item xs={12}>
@@ -430,7 +429,7 @@ const Form = (props) => {
           </Grid>
         )}
 
-        {/* Form Parent*/}
+        {/* Parent */}
         {orangtua && (
           <Grid container spacing={1.3} mt={0.1} alignItems="center">
             <Grid item xs={12}>
@@ -478,27 +477,30 @@ const Form = (props) => {
           <Grid item xs={12}>
             <FormControl className={classes.seragamLabel}>
               <FormLabel id="beliseragam">Beli Seragam</FormLabel>
-              <RadioGroup name="beliseragam" className={classes.radioButton}>
+              <RadioGroup
+                name="beliseragam"
+                className={classes.radioButton}
+                onChange={(e) => setBeliSeragam(e.target.value)}
+              >
                 <FormControlLabel
                   className={classes.fontSizeLabel}
                   value="Ya"
                   control={<Radio />}
                   label="Ya"
-                  // onChange={handleChangeBeliSeragam}
-                  onChange={handleChangeBeliSeragam}
+                  onChange={handleChangeSeragam}
                 />
                 <FormControlLabel
                   className={classes.fontSizeLabel}
                   value="Tidak"
                   control={<Radio />}
                   label="Tidak"
-                  onChange={handleChangeBeliSeragam}
+                  onChange={handleChangeSeragam}
                 />
               </RadioGroup>
             </FormControl>
           </Grid>
           {/* Choose size */}
-          {!beliseragam && (
+          {!seragam && (
             <Grid item xs={12}>
               <FormControl className={classes.seragamLabel}>
                 <FormLabel id="size">Ukuran</FormLabel>

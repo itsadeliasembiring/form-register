@@ -1,6 +1,13 @@
 // Import Theme
 import Colors from "../../Theme/Color";
 
+export const grid = {
+  textAlign: "center",
+  justifyContent: "center",
+  alignItems: "center",
+  mt: 1,
+};
+
 export const fontTitle = {
   textAlign: "center",
   fontWeight: "bold",

@@ -80,22 +80,14 @@ export const useStyles = makeStyles(() => ({
       color: Colors.seaGreen,
     },
   },
-  datePicker: {
-    "& .MuiInputBase-root": {
-      height: 1.4,
-    },
-    "& .MuiButtonBase-root .MuiPickersDay-root .Mui-selected": {
-      backgroundColor: Colors.seaGreen,
-    },
-  },
 }));
 
+// Font Styles
 export const fontTitle = {
   fontSize: 16,
   fontWeight: "bold",
   align: "left",
 };
-
 export const fontSubTitle = {
   fontSize: 14,
   fontWeight: "bold",

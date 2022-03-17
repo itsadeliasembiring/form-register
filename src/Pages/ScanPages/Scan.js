@@ -4,7 +4,7 @@ import { Button, Grid, Typography } from "@mui/material";
 // Import Icon
 import QrCode2Icon from "@mui/icons-material/QrCode2";
 // Import Styles
-import { fontTitle, fontDescription, icon, finishButton } from "./Styles";
+import { grid, fontTitle, fontDescription, icon, finishButton } from "./Styles";
 
 const Scan = (props) => {
   // Finish Button
@@ -18,12 +18,7 @@ const Scan = (props) => {
         Scan QRCode berikut:
       </Typography>
 
-      <Grid
-        container
-        textAlign="center"
-        justifyContent="center"
-        alignItems="center"
-      >
+      <Grid container sx={grid}>
         <Grid item xs={12}>
           <QrCode2Icon sx={icon} />
         </Grid>

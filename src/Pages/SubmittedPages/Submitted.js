@@ -2,7 +2,7 @@ import React from "react";
 // Import Component MUI
 import { Button, Grid, Typography } from "@mui/material";
 // Import Styles
-import { fontTitle, icon, homepageButton } from "./Styles";
+import { grid, fontTitle, icon, homepageButton } from "./Styles";
 // Import Icon
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
@@ -14,13 +14,7 @@ const Submitted = (props) => {
 
   return (
     <>
-      <Grid
-        container
-        textAlign="center"
-        justifyContent="center"
-        alignItems="center"
-        mt={1}
-      >
+      <Grid container sx={grid}>
         <Grid item xs={12}>
           <CheckCircleIcon sx={icon} />
         </Grid>

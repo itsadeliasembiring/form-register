@@ -25,6 +25,7 @@ import {
 export default function Cards(props) {
   const classes = useStyles();
   const { BiayaIuran, Seragam, Sabuk } = props;
+
   const [seragam, setSeragam] = useState(false);
   const [sabuk, setSabuk] = useState(false);
   const [total, setTotal] = useState(0);

@@ -16,7 +16,7 @@ export default function Navbar(props) {
     <>
       <AppBar elevation={"none"} sx={appBar}>
         <Box sx={box}>
-          {/* Icon */}
+          {/* Back IconButton */}
           <IconButton onClick={handleBack} sx={iconButton}>
             <ArrowBackTwoToneIcon sx={iconSize} />
           </IconButton>
