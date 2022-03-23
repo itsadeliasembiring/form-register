@@ -33,6 +33,7 @@ import {
   nextButton,
   useStyles,
 } from "./Styles";
+import axios from "axios";
 
 const Form = (props) => {
   const classes = useStyles();
@@ -116,6 +117,29 @@ const Form = (props) => {
     };
     props.parentCallback(dataSend);
     event.preventDefault();
+    // Post To API
+    const json = {
+      profile: profileImage,
+      name: nama,
+      gender: jeniskelamin,
+      placeOfBirth: tempatlahir,
+      dateOfBirth: tanggallahir,
+      address: alamat,
+      reasonRegister: alasanmendaftar,
+      college: perguruan,
+      dojoName: dojo,
+      trainer: pelatih,
+      finalExam: ujianterakhir,
+      level: tingkatan,
+      fileCertificate: filename,
+      parentName: namaorangtua,
+      parentPhoneNumber: teleponorangtua,
+      buyUniform: beliseragam,
+      sizeUniform: ukuranseragam,
+    };
+    axios.post("http://localhost:8000/users/add", json).then((result) => {
+      console.log(result);
+    });
   };
   // Cancel Button
   const handleCancel = () => {
